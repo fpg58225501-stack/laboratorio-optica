@@ -3,410 +3,724 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laboratório Virtual de Lentes</title>
+
+<title>Tópico 1 — Lentes Esféricas</title>
 
 <style>
-    *{
-        box-sizing:border-box;
-        margin:0;
-        padding:0;
-        font-family:Arial, Helvetica, sans-serif;
-    }
+*{
+    box-sizing:border-box;
+}
 
-    body{
-        background:#f3f4f6;
-        color:#222;
-        min-height:100vh;
-        padding:20px;
-    }
+html{
+    scroll-behavior:smooth;
+}
 
-    .container{
-        max-width:1400px;
-        margin:auto;
-    }
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f6f8;
+    color:#172033;
+}
 
-    h1{
-        text-align:center;
-        margin-bottom:8px;
-        font-size:32px;
-    }
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(255,255,255,.96);
+    border-bottom:1px solid #dce3ea;
+    box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
 
-    .subtitulo{
-        text-align:center;
-        margin-bottom:22px;
-        color:#555;
-        font-size:16px;
-    }
+.nav-inner{
+    max-width:1350px;
+    margin:auto;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:10px;
+}
 
-    .layout{
-        display:grid;
-        grid-template-columns:340px 1fr;
-        gap:20px;
-        align-items:start;
-    }
+nav a{
+    text-decoration:none;
+    color:#334155;
+    padding:9px 15px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:bold;
+}
 
-    .painel{
-        background:white;
-        border-radius:16px;
+nav a:hover{
+    background:#eaf2ff;
+}
+
+header{
+    text-align:center;
+    padding:48px 20px 30px;
+    background:white;
+}
+
+header h1{
+    margin:0;
+    font-size:38px;
+}
+
+header p{
+    margin:10px 0 0;
+    color:#64748b;
+    font-size:18px;
+}
+
+section{
+    max-width:1350px;
+    margin:24px auto;
+    padding:28px;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 5px 22px rgba(0,0,0,.07);
+}
+
+.titulo-secao{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:8px;
+}
+
+.numero{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#172033;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    font-size:20px;
+}
+
+h2{
+    margin:0;
+    font-size:27px;
+}
+
+.explicacao{
+    font-size:18px;
+    line-height:1.55;
+    color:#475569;
+    margin:15px 0 22px;
+}
+
+.definicao{
+    background:#f8fafc;
+    border-left:6px solid #2563eb;
+    border-radius:12px;
+    padding:18px 22px;
+    font-size:22px;
+    margin-bottom:22px;
+}
+
+.area{
+    display:grid;
+    grid-template-columns:300px 1fr;
+    gap:20px;
+    align-items:start;
+}
+
+.controles{
+    background:#f8fafc;
+    padding:17px;
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+}
+
+.controles h3{
+    margin-top:0;
+}
+
+label{
+    font-size:14px;
+    font-weight:bold;
+    display:block;
+    margin-bottom:6px;
+}
+
+select,
+input[type=number]{
+    width:100%;
+    padding:11px;
+    border:1px solid #cbd5e1;
+    border-radius:9px;
+    font-size:15px;
+    background:white;
+}
+
+.grupo{
+    margin-bottom:15px;
+}
+
+button{
+    border:0;
+    border-radius:10px;
+    padding:12px 16px;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.botao-principal{
+    background:#172033;
+    color:white;
+}
+
+.botao-claro{
+    background:#e8edf3;
+    color:#172033;
+}
+
+.botao-largo{
+    width:100%;
+    margin-top:7px;
+}
+
+canvas{
+    display:block;
+    width:100%;
+    height:auto;
+    background:white;
+    border:1px solid #dce3ea;
+    border-radius:15px;
+}
+
+.caixa-info{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    padding:15px;
+    margin-top:12px;
+    min-height:58px;
+    font-size:16px;
+    line-height:1.45;
+}
+
+.controle-elementos{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:15px;
+}
+
+.contador{
+    text-align:center;
+    color:#64748b;
+    margin-top:10px;
+    font-size:14px;
+}
+
+.grade-lentes{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.cartao-lente{
+    border:1px solid #dce3ea;
+    border-radius:15px;
+    padding:14px;
+    text-align:center;
+    cursor:pointer;
+    transition:.25s;
+    background:#fff;
+}
+
+.cartao-lente:hover{
+    transform:translateY(-3px);
+    box-shadow:0 7px 18px rgba(0,0,0,.08);
+}
+
+.cartao-lente.ativo{
+    border:3px solid #2563eb;
+    transform:scale(1.03);
+    box-shadow:0 8px 24px rgba(37,99,235,.15);
+}
+
+.cartao-lente canvas{
+    border:0;
+    height:150px;
+}
+
+.nome-lente{
+    font-size:17px;
+    font-weight:bold;
+    margin-top:4px;
+}
+
+.borda-tag{
+    display:inline-block;
+    margin-top:8px;
+    background:#eef2f7;
+    padding:6px 11px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.detalhe-lente{
+    max-width:700px;
+    margin:18px auto 0;
+    text-align:center;
+    background:#f8fafc;
+    border-radius:12px;
+    padding:15px;
+    min-height:65px;
+}
+
+.centralizar{
+    text-align:center;
+    margin:18px 0;
+}
+
+.linha-indices{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.previsao{
+    background:#fff;
+    border:1px solid #dce3ea;
+    border-radius:11px;
+    padding:12px;
+    margin-top:12px;
+}
+
+.previsao label{
+    display:inline;
+    font-weight:normal;
+    margin-left:4px;
+}
+
+.opcao{
+    margin:8px 0;
+}
+
+.painel-resultados{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:12px;
+}
+
+.mini-card{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:11px;
+    padding:12px;
+    text-align:center;
+}
+
+.mini-card span{
+    display:block;
+    color:#64748b;
+    font-size:12px;
+    margin-bottom:5px;
+}
+
+.mini-card strong{
+    font-size:15px;
+}
+
+.correto{
+    border-left:6px solid #16a34a;
+    background:#ecfdf5;
+}
+
+.errado{
+    border-left:6px solid #dc2626;
+    background:#fef2f2;
+}
+
+.aviso{
+    border-left:6px solid #f59e0b;
+    background:#fffbeb;
+}
+
+@media(max-width:900px){
+
+    section{
+        margin:15px 10px;
         padding:18px;
-        box-shadow:0 4px 18px rgba(0,0,0,.08);
     }
 
-    .painel h2{
-        font-size:20px;
-        margin-bottom:14px;
+    .area{
+        grid-template-columns:1fr;
     }
 
-    .grupo{
-        margin-bottom:16px;
+    .grade-lentes{
+        grid-template-columns:1fr 1fr;
     }
 
-    label{
-        display:block;
-        font-weight:bold;
-        margin-bottom:6px;
-        font-size:14px;
+    .painel-resultados{
+        grid-template-columns:1fr 1fr;
     }
 
-    select,
-    input[type="number"]{
-        width:100%;
-        padding:10px;
-        border:1px solid #ccc;
-        border-radius:8px;
-        font-size:15px;
+}
+
+@media(max-width:560px){
+
+    .grade-lentes{
+        grid-template-columns:1fr;
     }
 
-    input[type="range"]{
-        width:100%;
+    header h1{
+        font-size:29px;
     }
 
-    .linha{
-        display:flex;
-        gap:10px;
-    }
-
-    .linha > div{
-        flex:1;
-    }
-
-    .valor{
-        font-size:13px;
-        color:#555;
-        margin-top:4px;
-    }
-
-    .checkbox{
-        display:flex;
-        align-items:center;
-        gap:8px;
-        margin-top:10px;
-        font-size:14px;
-    }
-
-    .checkbox input{
-        transform:scale(1.15);
-    }
-
-    .previsao{
-        background:#f8fafc;
-        border:1px solid #ddd;
-        padding:12px;
-        border-radius:10px;
-        margin-top:10px;
-    }
-
-    .previsao p{
-        font-weight:bold;
-        margin-bottom:8px;
-    }
-
-    .opcao{
-        margin:6px 0;
-    }
-
-    button{
-        width:100%;
-        border:none;
-        border-radius:10px;
-        padding:12px;
-        font-size:15px;
-        font-weight:bold;
-        cursor:pointer;
-        margin-top:8px;
-    }
-
-    .btn-principal{
-        background:#111827;
-        color:white;
-    }
-
-    .btn-secundario{
-        background:#e5e7eb;
-        color:#222;
-    }
-
-    .area-simulacao{
-        background:white;
-        border-radius:16px;
-        box-shadow:0 4px 18px rgba(0,0,0,.08);
-        padding:14px;
-    }
-
-    canvas{
-        width:100%;
-        height:560px;
-        border-radius:12px;
-        background:#ffffff;
-        display:block;
-        border:1px solid #ddd;
-    }
-
-    .info{
-        display:grid;
-        grid-template-columns:repeat(3,1fr);
-        gap:10px;
-        margin-top:14px;
-    }
-
-    .card{
-        background:#f8fafc;
-        border:1px solid #ddd;
-        border-radius:10px;
-        padding:12px;
-        text-align:center;
-    }
-
-    .card span{
-        display:block;
-        font-size:12px;
-        color:#666;
-        margin-bottom:4px;
-    }
-
-    .card strong{
-        font-size:16px;
-    }
-
-    .resultado{
-        margin-top:14px;
-        padding:14px;
-        border-radius:10px;
-        background:#f3f4f6;
-        border-left:5px solid #111827;
-        font-size:15px;
-        line-height:1.5;
-    }
-
-    .correto{
-        background:#ecfdf5;
-        border-left-color:#16a34a;
-    }
-
-    .errado{
-        background:#fef2f2;
-        border-left-color:#dc2626;
-    }
-
-    @media(max-width:900px){
-        .layout{
-            grid-template-columns:1fr;
-        }
-
-        canvas{
-            height:480px;
-        }
-
-        .info{
-            grid-template-columns:1fr 1fr;
-        }
-    }
+}
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<nav>
+<div class="nav-inner">
+<a href="#definicao">1. Definição</a>
+<a href="#elementos">2. Elementos geométricos</a>
+<a href="#tipos">3. Tipos de lentes</a>
+<a href="#comportamento">4. Convergência e divergência</a>
+</div>
+</nav>
 
-    <h1>Laboratório Virtual de Lentes</h1>
-    <div class="subtitulo">
-        Elementos geométricos, refração, convergência e divergência
-    </div>
+<header>
+<h1>Tópico 1 — Lentes Esféricas</h1>
+<p>Elementos geométricos e comportamento das lentes</p>
+</header>
 
-    <div class="layout">
 
-        <div class="painel">
+<!-- ========================================================= -->
+<!-- 1 - DEFINIÇÃO                                             -->
+<!-- ========================================================= -->
 
-            <h2>Controles</h2>
+<section id="definicao">
 
-            <div class="grupo">
-                <label>Tipo de lente</label>
-                <select id="tipoLente">
-                    <option value="biconvexa">Biconvexa</option>
-                    <option value="planoConvexa">Plano-convexa</option>
-                    <option value="concavoConvexa">Côncavo-convexa</option>
-                    <option value="biconcava">Bicôncava</option>
-                    <option value="planoConcava">Plano-côncava</option>
-                    <option value="convexoConcava">Convexo-côncava</option>
-                </select>
-            </div>
+<div class="titulo-secao">
+<div class="numero">1</div>
+<h2>O que é uma lente?</h2>
+</div>
 
-            <div class="grupo">
-                <label>Raio de curvatura R₁</label>
-                <input id="r1" type="range" min="80" max="300" value="150">
-                <div class="valor">
-                    R₁ = <span id="r1Valor">150</span> u.a.
-                </div>
-            </div>
+<div class="definicao">
+Uma <strong>lente</strong> é um sistema óptico transparente que
+<strong>muda a trajetória da luz</strong>.
+</div>
 
-            <div class="grupo">
-                <label>Raio de curvatura R₂</label>
-                <input id="r2" type="range" min="80" max="300" value="150">
-                <div class="valor">
-                    R₂ = <span id="r2Valor">150</span> u.a.
-                </div>
-            </div>
+<p class="explicacao">
+Observe o que acontece com raios luminosos paralelos quando atravessam
+diferentes tipos de lentes.
+</p>
 
-            <div class="linha">
+<div class="area">
 
-                <div class="grupo">
-                    <label>n da lente</label>
-                    <input id="nLente" type="number" step="0.01" value="1.50">
-                </div>
+<div class="controles">
 
-                <div class="grupo">
-                    <label>n do meio</label>
-                    <input id="nMeio" type="number" step="0.01" value="1.00">
-                </div>
+<h3>Escolha o objeto óptico</h3>
 
-            </div>
+<div class="grupo">
+<label>Objeto</label>
 
-            <div class="checkbox">
-                <input type="checkbox" id="mostrarElementos">
-                <label for="mostrarElementos" style="margin:0;">
-                    Mostrar elementos geométricos
-                </label>
-            </div>
+<select id="objetoDef">
+<option value="biconvexa">Lente biconvexa</option>
+<option value="planoConvexa">Lente plano-convexa</option>
+<option value="biconcava">Lente bicôncava</option>
+<option value="planoConcava">Lente plano-côncava</option>
+</select>
+</div>
 
-            <div class="previsao">
-                <p>Antes de testar, faça sua previsão:</p>
+<button class="botao-principal botao-largo" id="btnLuzDef">
+▶ INCIDIR LUZ
+</button>
 
-                <div class="opcao">
-                    <input type="radio" name="previsao" value="convergente" id="prevConv">
-                    <label for="prevConv" style="display:inline;font-weight:normal;">
-                        Os raios irão convergir
-                    </label>
-                </div>
-
-                <div class="opcao">
-                    <input type="radio" name="previsao" value="divergente" id="prevDiv">
-                    <label for="prevDiv" style="display:inline;font-weight:normal;">
-                        Os raios irão divergir
-                    </label>
-                </div>
-            </div>
-
-            <button class="btn-principal" id="btnPropagar">
-                ▶ PROPAGAR LUZ
-            </button>
-
-            <button class="btn-secundario" id="btnReset">
-                RESETAR
-            </button>
-
-        </div>
-
-        <div class="area-simulacao">
-
-            <canvas id="canvas" width="1000" height="560"></canvas>
-
-            <div class="info">
-
-                <div class="card">
-                    <span>Tipo geométrico</span>
-                    <strong id="infoTipo">Biconvexa</strong>
-                </div>
-
-                <div class="card">
-                    <span>Bordas</span>
-                    <strong id="infoBordas">Finas</strong>
-                </div>
-
-                <div class="card">
-                    <span>Comportamento</span>
-                    <strong id="infoComportamento">---</strong>
-                </div>
-
-                <div class="card">
-                    <span>n lente</span>
-                    <strong id="infoNLente">1,50</strong>
-                </div>
-
-                <div class="card">
-                    <span>n meio</span>
-                    <strong id="infoNMeio">1,00</strong>
-                </div>
-
-                <div class="card">
-                    <span>Foco</span>
-                    <strong id="infoFoco">---</strong>
-                </div>
-
-            </div>
-
-            <div id="resultado" class="resultado">
-                Escolha os parâmetros, faça sua previsão e clique em
-                <b>Propagar luz</b>.
-            </div>
-
-        </div>
-
-    </div>
+<button class="botao-claro botao-largo" id="btnResetDef">
+RESETAR
+</button>
 
 </div>
 
+<div>
+
+<canvas id="canvasDef" width="920" height="430"></canvas>
+
+<div class="caixa-info" id="textoDef">
+Escolha uma lente e clique em <b>Incidir luz</b>.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- 2 - ELEMENTOS                                             -->
+<!-- ========================================================= -->
+
+<section id="elementos">
+
+<div class="titulo-secao">
+<div class="numero">2</div>
+<h2>Elementos geométricos da lente</h2>
+</div>
+
+<p class="explicacao">
+Vamos construir a representação geométrica de uma lente biconvexa,
+um elemento de cada vez.
+</p>
+
+<canvas id="canvasElementos" width="1100" height="500"></canvas>
+
+<div class="caixa-info" id="textoElemento">
+Clique em <b>Próximo</b> para iniciar.
+</div>
+
+<div class="controle-elementos">
+
+<button class="botao-claro" id="btnAnterior">
+← ANTERIOR
+</button>
+
+<button class="botao-principal" id="btnProximo">
+PRÓXIMO →
+</button>
+
+<button class="botao-claro" id="btnResetElementos">
+RESETAR
+</button>
+
+</div>
+
+<div class="contador" id="contadorElemento">
+0 / 9
+</div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- 3 - TIPOS                                                 -->
+<!-- ========================================================= -->
+
+<section id="tipos">
+
+<div class="titulo-secao">
+<div class="numero">3</div>
+<h2>Tipos de lentes</h2>
+</div>
+
+<p class="explicacao">
+As lentes podem ser classificadas pelo formato de suas duas superfícies
+e também pela espessura de suas bordas.
+</p>
+
+<div class="grade-lentes">
+
+<div class="cartao-lente" data-lente="biconvexa">
+<canvas width="260" height="150"></canvas>
+<div class="nome-lente">Biconvexa</div>
+<div class="borda-tag">Bordas finas</div>
+</div>
+
+<div class="cartao-lente" data-lente="planoConvexa">
+<canvas width="260" height="150"></canvas>
+<div class="nome-lente">Plano-convexa</div>
+<div class="borda-tag">Bordas finas</div>
+</div>
+
+<div class="cartao-lente" data-lente="concavoConvexa">
+<canvas width="260" height="150"></canvas>
+<div class="nome-lente">Côncavo-convexa</div>
+<div class="borda-tag">Bordas finas</div>
+</div>
+
+<div class="cartao-lente" data-lente="biconcava">
+<canvas width="260" height="150"></canvas>
+<div class="nome-lente">Bicôncava</div>
+<div class="borda-tag">Bordas espessas</div>
+</div>
+
+<div class="cartao-lente" data-lente="planoConcava">
+<canvas width="260" height="150"></canvas>
+<div class="nome-lente">Plano-côncava</div>
+<div class="borda-tag">Bordas espessas</div>
+</div>
+
+<div class="cartao-lente" data-lente="convexoConcava">
+<canvas width="260" height="150"></canvas>
+<div class="nome-lente">Convexo-côncava</div>
+<div class="borda-tag">Bordas espessas</div>
+</div>
+
+</div>
+
+<div class="centralizar">
+
+<button class="botao-principal" id="btnClassificar">
+▶ INICIAR CLASSIFICAÇÃO
+</button>
+
+<button class="botao-claro" id="btnPararClassificacao">
+RESETAR
+</button>
+
+</div>
+
+<div class="detalhe-lente" id="detalheLente">
+Clique em uma lente ou inicie a classificação automática.
+</div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- 4 - COMPORTAMENTO                                         -->
+<!-- ========================================================= -->
+
+<section id="comportamento">
+
+<div class="titulo-secao">
+<div class="numero">4</div>
+<h2>Convergência e divergência</h2>
+</div>
+
+<p class="explicacao">
+Agora observe como o formato da lente e a relação entre os índices de
+refração determinam o comportamento dos raios luminosos.
+</p>
+
+<div class="area">
+
+<div class="controles">
+
+<div class="grupo">
+
+<label>Tipo de lente</label>
+
+<select id="tipoFinal">
+<option value="biconvexa">Biconvexa</option>
+<option value="planoConvexa">Plano-convexa</option>
+<option value="concavoConvexa">Côncavo-convexa</option>
+<option value="biconcava">Bicôncava</option>
+<option value="planoConcava">Plano-côncava</option>
+<option value="convexoConcava">Convexo-côncava</option>
+</select>
+
+</div>
+
+<div class="grupo">
+<label>Bordas</label>
+<input id="bordasFinal" type="text" value="Finas" disabled>
+</div>
+
+<div class="linha-indices">
+
+<div class="grupo">
+<label>n da lente</label>
+<input id="nLenteFinal" type="number" step="0.01" value="1.50">
+</div>
+
+<div class="grupo">
+<label>n do meio</label>
+<input id="nMeioFinal" type="number" step="0.01" value="1.00">
+</div>
+
+</div>
+
+<div class="previsao">
+
+<strong>Antes da experiência:</strong>
+
+<div class="opcao">
+<input type="radio" name="previsaoFinal" value="convergente" id="prevC">
+<label for="prevC">Será convergente</label>
+</div>
+
+<div class="opcao">
+<input type="radio" name="previsaoFinal" value="divergente" id="prevD">
+<label for="prevD">Será divergente</label>
+</div>
+
+</div>
+
+<button class="botao-principal botao-largo" id="btnPropagarFinal">
+▶ PROPAGAR LUZ
+</button>
+
+<button class="botao-claro botao-largo" id="btnResetFinal">
+RESETAR
+</button>
+
+</div>
+
+<div>
+
+<canvas id="canvasFinal" width="920" height="470"></canvas>
+
+<div class="painel-resultados">
+
+<div class="mini-card">
+<span>Tipo</span>
+<strong id="rTipo">Biconvexa</strong>
+</div>
+
+<div class="mini-card">
+<span>Bordas</span>
+<strong id="rBorda">Finas</strong>
+</div>
+
+<div class="mini-card">
+<span>Comportamento</span>
+<strong id="rComp">—</strong>
+</div>
+
+<div class="mini-card">
+<span>Foco</span>
+<strong id="rFoco">—</strong>
+</div>
+
+</div>
+
+<div class="caixa-info" id="resultadoFinal">
+Faça sua previsão e clique em <b>Propagar luz</b>.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
 <script>
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
 
-const tipoLente = document.getElementById("tipoLente");
-const r1Input = document.getElementById("r1");
-const r2Input = document.getElementById("r2");
-const nLenteInput = document.getElementById("nLente");
-const nMeioInput = document.getElementById("nMeio");
-const mostrarElementos = document.getElementById("mostrarElementos");
-
-const r1Valor = document.getElementById("r1Valor");
-const r2Valor = document.getElementById("r2Valor");
-
-const infoTipo = document.getElementById("infoTipo");
-const infoBordas = document.getElementById("infoBordas");
-const infoComportamento = document.getElementById("infoComportamento");
-const infoNLente = document.getElementById("infoNLente");
-const infoNMeio = document.getElementById("infoNMeio");
-const infoFoco = document.getElementById("infoFoco");
-
-const resultado = document.getElementById("resultado");
-
-let animando = false;
-let progresso = 0;
-let comportamentoAtual = null;
+/* ============================================================
+   FUNÇÕES GERAIS DAS LENTES
+============================================================ */
 
 const nomes = {
-    biconvexa: "Biconvexa",
-    planoConvexa: "Plano-convexa",
-    concavoConvexa: "Côncavo-convexa",
-    biconcava: "Bicôncava",
-    planoConcava: "Plano-côncava",
-    convexoConcava: "Convexo-côncava"
+    biconvexa:"Biconvexa",
+    planoConvexa:"Plano-convexa",
+    concavoConvexa:"Côncavo-convexa",
+    biconcava:"Bicôncava",
+    planoConcava:"Plano-côncava",
+    convexoConcava:"Convexo-côncava"
 };
 
-function bordasDaLente(tipo){
+function bordaLente(tipo){
 
     if(
-        tipo === "biconvexa" ||
-        tipo === "planoConvexa" ||
-        tipo === "concavoConvexa"
+        tipo==="biconvexa" ||
+        tipo==="planoConvexa" ||
+        tipo==="concavoConvexa"
     ){
         return "Finas";
     }
@@ -414,174 +728,157 @@ function bordasDaLente(tipo){
     return "Espessas";
 }
 
-function calcularComportamento(){
 
-    const tipo = tipoLente.value;
-    const nLente = parseFloat(nLenteInput.value);
-    const nMeio = parseFloat(nMeioInput.value);
+/*
+Desenha os seis formatos didáticos de lente.
+Essa função é visual.
+*/
 
-    const bordas = bordasDaLente(tipo);
+function desenharFormatoLente(ctx,cx,cy,h,tipo,escala=1){
 
-    if(Math.abs(nLente - nMeio) < 0.0001){
-        return "neutra";
-    }
+    const metade = h/2;
+    const topo = cy-metade;
+    const baixo = cy+metade;
 
-    if(nLente > nMeio){
-
-        if(bordas === "Finas"){
-            return "convergente";
-        }else{
-            return "divergente";
-        }
-
-    }else{
-
-        if(bordas === "Finas"){
-            return "divergente";
-        }else{
-            return "convergente";
-        }
-    }
-}
-
-function desenharEixo(){
-
-    ctx.beginPath();
-    ctx.strokeStyle = "#777";
-    ctx.lineWidth = 1.5;
-    ctx.moveTo(30, canvas.height/2);
-    ctx.lineTo(canvas.width-30, canvas.height/2);
-    ctx.stroke();
-
-    ctx.fillStyle="#555";
-    ctx.font="14px Arial";
-    ctx.fillText(
-        "Eixo óptico",
-        canvas.width-110,
-        canvas.height/2-8
-    );
-}
-
-function desenharLente(){
-
-    const tipo = tipoLente.value;
-
-    const cx = canvas.width/2;
-    const cy = canvas.height/2;
-
-    const h = 250;
-    const topo = cy-h/2;
-    const baixo = cy+h/2;
+    const fina = 32*escala;
+    const grossa = 62*escala;
 
     ctx.save();
 
     ctx.beginPath();
 
-    if(tipo === "biconvexa"){
+    if(tipo==="biconvexa"){
 
-        ctx.moveTo(cx, topo);
+        ctx.moveTo(cx,topo);
 
         ctx.bezierCurveTo(
-            cx-85, topo+45,
-            cx-85, baixo-45,
-            cx, baixo
+            cx-65*escala,
+            topo+40*escala,
+            cx-65*escala,
+            baixo-40*escala,
+            cx,
+            baixo
         );
 
         ctx.bezierCurveTo(
-            cx+85, baixo-45,
-            cx+85, topo+45,
-            cx, topo
+            cx+65*escala,
+            baixo-40*escala,
+            cx+65*escala,
+            topo+40*escala,
+            cx,
+            topo
         );
-
     }
 
-    if(tipo === "planoConvexa"){
+    else if(tipo==="planoConvexa"){
 
-        ctx.moveTo(cx-35, topo);
-        ctx.lineTo(cx-35, baixo);
+        ctx.moveTo(cx-fina,topo);
+        ctx.lineTo(cx-fina,baixo);
 
         ctx.bezierCurveTo(
-            cx+90, baixo-35,
-            cx+90, topo+35,
-            cx-35, topo
+            cx+75*escala,
+            baixo-35*escala,
+            cx+75*escala,
+            topo+35*escala,
+            cx-fina,
+            topo
         );
-
     }
 
-    if(tipo === "concavoConvexa"){
+    else if(tipo==="concavoConvexa"){
 
-        ctx.moveTo(cx-35, topo);
+        ctx.moveTo(cx-15*escala,topo);
 
         ctx.bezierCurveTo(
-            cx-75, topo+45,
-            cx-75, baixo-45,
-            cx-35, baixo
+            cx-48*escala,
+            topo+42*escala,
+            cx-48*escala,
+            baixo-42*escala,
+            cx-15*escala,
+            baixo
         );
 
         ctx.bezierCurveTo(
-            cx+100, baixo-30,
-            cx+100, topo+30,
-            cx-35, topo
+            cx+78*escala,
+            baixo-32*escala,
+            cx+78*escala,
+            topo+32*escala,
+            cx-15*escala,
+            topo
         );
-
     }
 
-    if(tipo === "biconcava"){
+    else if(tipo==="biconcava"){
 
-        ctx.moveTo(cx-55, topo);
+        ctx.moveTo(cx-grossa,topo);
 
         ctx.bezierCurveTo(
-            cx+5, topo+55,
-            cx+5, baixo-55,
-            cx-55, baixo
+            cx-8*escala,
+            topo+45*escala,
+            cx-8*escala,
+            baixo-45*escala,
+            cx-grossa,
+            baixo
         );
 
-        ctx.lineTo(cx+55, baixo);
+        ctx.lineTo(cx+grossa,baixo);
 
         ctx.bezierCurveTo(
-            cx-5, baixo-55,
-            cx-5, topo+55,
-            cx+55, topo
+            cx+8*escala,
+            baixo-45*escala,
+            cx+8*escala,
+            topo+45*escala,
+            cx+grossa,
+            topo
         );
 
         ctx.closePath();
     }
 
-    if(tipo === "planoConcava"){
+    else if(tipo==="planoConcava"){
 
-        ctx.moveTo(cx-35, topo);
-        ctx.lineTo(cx-35, baixo);
-
-        ctx.lineTo(cx+55, baixo);
+        ctx.moveTo(cx-grossa,topo);
+        ctx.lineTo(cx-grossa,baixo);
+        ctx.lineTo(cx+grossa,baixo);
 
         ctx.bezierCurveTo(
-            cx-5, baixo-55,
-            cx-5, topo+55,
-            cx+55, topo
+            cx,
+            baixo-45*escala,
+            cx,
+            topo+45*escala,
+            cx+grossa,
+            topo
         );
 
         ctx.closePath();
     }
 
-    if(tipo === "convexoConcava"){
+    else if(tipo==="convexoConcava"){
 
-        ctx.moveTo(cx-55, topo);
+        ctx.moveTo(cx-60*escala,topo);
 
         ctx.bezierCurveTo(
-            cx+70, topo+30,
-            cx+70, baixo-30,
-            cx-55, baixo
+            cx+42*escala,
+            topo+30*escala,
+            cx+42*escala,
+            baixo-30*escala,
+            cx-60*escala,
+            baixo
         );
 
         ctx.bezierCurveTo(
-            cx-10, baixo-60,
-            cx-10, topo+60,
-            cx-55, topo
+            cx-2*escala,
+            baixo-48*escala,
+            cx-2*escala,
+            topo+48*escala,
+            cx-60*escala,
+            topo
         );
 
+        ctx.closePath();
     }
 
-    ctx.fillStyle="rgba(120,190,255,0.32)";
+    ctx.fillStyle="rgba(80,160,245,.28)";
     ctx.strokeStyle="#2563eb";
     ctx.lineWidth=3;
 
@@ -589,436 +886,1500 @@ function desenharLente(){
     ctx.stroke();
 
     ctx.restore();
-
-    if(mostrarElementos.checked){
-        desenharElementosGeometricos();
-    }
 }
 
-function desenharElementosGeometricos(){
 
-    const cx = canvas.width/2;
-    const cy = canvas.height/2;
+/* ============================================================
+   PARTE 1 — DEFINIÇÃO
+============================================================ */
 
-    const c1x = cx-170;
-    const c2x = cx+170;
+const cDef =
+document.getElementById("canvasDef");
 
-    ctx.save();
+const xDef =
+cDef.getContext("2d");
 
-    ctx.setLineDash([7,6]);
-    ctx.strokeStyle="#999";
-    ctx.lineWidth=1;
+const objetoDef =
+document.getElementById("objetoDef");
 
-    ctx.beginPath();
-    ctx.arc(c1x,cy,150,0,Math.PI*2);
-    ctx.stroke();
+const textoDef =
+document.getElementById("textoDef");
 
-    ctx.beginPath();
-    ctx.arc(c2x,cy,150,0,Math.PI*2);
-    ctx.stroke();
+let progressoDef=0;
+let rodandoDef=false;
 
-    ctx.setLineDash([]);
 
-    marcarPonto(c1x,cy,"C₁");
-    marcarPonto(c2x,cy,"C₂");
+function comportamentoBasico(tipo){
 
-    marcarPonto(cx-35,cy,"V₁");
-    marcarPonto(cx+35,cy,"V₂");
-
-    marcarPonto(cx,cy,"O");
-
-    ctx.strokeStyle="#555";
-
-    ctx.beginPath();
-    ctx.moveTo(c1x,cy-30);
-    ctx.lineTo(cx-35,cy-30);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(cx+35,cy+30);
-    ctx.lineTo(c2x,cy+30);
-    ctx.stroke();
-
-    ctx.fillStyle="#333";
-    ctx.font="14px Arial";
-
-    ctx.fillText("R₁", (c1x+cx-35)/2, cy-38);
-    ctx.fillText("R₂", (c2x+cx+35)/2, cy+48);
-
-    ctx.restore();
+    return bordaLente(tipo)==="Finas"
+        ? "convergente"
+        : "divergente";
 }
 
-function marcarPonto(x,y,texto){
 
-    ctx.beginPath();
-    ctx.fillStyle="#111";
-    ctx.arc(x,y,4,0,Math.PI*2);
-    ctx.fill();
+function desenharDef(){
 
-    ctx.font="14px Arial";
-    ctx.fillText(texto,x+7,y-8);
-}
+    xDef.clearRect(0,0,cDef.width,cDef.height);
 
-function desenharRaios(progressoAnimacao){
+    const cx=465;
+    const cy=215;
 
-    if(!comportamentoAtual) return;
+    /* eixo */
 
-    const cx = canvas.width/2;
-    const cy = canvas.height/2;
+    xDef.strokeStyle="#9ca3af";
+    xDef.lineWidth=1.5;
 
-    const inicioX = 70;
-    const lenteX = cx;
+    xDef.beginPath();
+    xDef.moveTo(35,cy);
+    xDef.lineTo(cDef.width-35,cy);
+    xDef.stroke();
 
-    const alturas = [-90,-45,0,45,90];
+    desenharFormatoLente(
+        xDef,
+        cx,
+        cy,
+        250,
+        objetoDef.value,
+        1
+    );
 
-    const focoDistancia = 210;
+    if(progressoDef<=0)
+        return;
 
-    alturas.forEach(offset => {
+    const ys=[
+        cy-75,
+        cy-38,
+        cy,
+        cy+38,
+        cy+75
+    ];
 
-        const yi = cy+offset;
+    const comportamento =
+    comportamentoBasico(objetoDef.value);
 
-        const pEntrada = Math.min(progressoAnimacao*2,1);
+    const focoX=
+    comportamento==="convergente"
+        ? cx+225
+        : cx-225;
 
-        let xAtual = inicioX +
-            (lenteX-inicioX)*pEntrada;
+    ys.forEach(y=>{
 
-        ctx.strokeStyle="#2563eb";
-        ctx.lineWidth=2.5;
+        const etapaEntrada =
+        Math.min(progressoDef*2,1);
 
-        ctx.beginPath();
-        ctx.moveTo(inicioX,yi);
-        ctx.lineTo(xAtual,yi);
-        ctx.stroke();
+        const inicioX=55;
 
-        if(progressoAnimacao <= 0.5){
+        const xEntrada =
+        inicioX+
+        (cx-inicioX)*etapaEntrada;
+
+        xDef.strokeStyle="#2563eb";
+        xDef.lineWidth=2.5;
+
+        xDef.beginPath();
+        xDef.moveTo(inicioX,y);
+        xDef.lineTo(xEntrada,y);
+        xDef.stroke();
+
+        if(progressoDef<=.5)
             return;
-        }
 
-        const pSaida =
-            Math.min((progressoAnimacao-0.5)*2,1);
+        const etapaSaida=
+        Math.min((progressoDef-.5)*2,1);
 
-        let finalX = canvas.width-80;
+        const finalX=cDef.width-55;
+
         let finalY;
 
-        if(comportamentoAtual === "convergente"){
+        if(comportamento==="convergente"){
 
-            const focoX = cx+focoDistancia;
+            const m=
+            (cy-y)/(focoX-cx);
 
-            const slope =
-                (cy-yi)/(focoX-cx);
-
-            finalY =
-                yi+slope*(finalX-cx);
-
-        }else if(
-            comportamentoAtual === "divergente"
-        ){
-
-            const focoVirtual = cx-focoDistancia;
-
-            const slope =
-                (yi-cy)/(cx-focoVirtual);
-
-            finalY =
-                yi+slope*(finalX-cx);
+            finalY=
+            y+m*(finalX-cx);
 
         }else{
 
-            finalY=yi;
+            const m=
+            (y-cy)/(cx-focoX);
+
+            finalY=
+            y+m*(finalX-cx);
         }
 
-        const xa =
-            lenteX+
-            (finalX-lenteX)*pSaida;
+        const xa=
+        cx+(finalX-cx)*etapaSaida;
 
-        const ya =
-            yi+
-            (finalY-yi)*pSaida;
+        const ya=
+        y+(finalY-y)*etapaSaida;
 
-        ctx.strokeStyle="#ef4444";
+        xDef.strokeStyle="#dc2626";
 
-        ctx.beginPath();
-        ctx.moveTo(lenteX,yi);
-        ctx.lineTo(xa,ya);
-        ctx.stroke();
+        xDef.beginPath();
+        xDef.moveTo(cx,y);
+        xDef.lineTo(xa,ya);
+        xDef.stroke();
 
-        if(
-            comportamentoAtual === "divergente" &&
-            progressoAnimacao >= 1
-        ){
-
-            const focoVirtual = cx-focoDistancia;
-
-            ctx.save();
-            ctx.setLineDash([6,6]);
-            ctx.strokeStyle="#999";
-
-            ctx.beginPath();
-            ctx.moveTo(lenteX,yi);
-            ctx.lineTo(focoVirtual,cy);
-            ctx.stroke();
-
-            ctx.restore();
-        }
     });
 
-    if(progressoAnimacao>=1){
 
-        if(comportamentoAtual==="convergente"){
-            marcarFoco(cx+focoDistancia,cy,"F");
+    if(progressoDef>=1){
+
+        if(comportamento==="convergente"){
+
+            xDef.fillStyle="#111827";
+
+            xDef.beginPath();
+            xDef.arc(focoX,cy,5,0,Math.PI*2);
+            xDef.fill();
+
+            xDef.font="bold 16px Arial";
+            xDef.fillText("F",focoX-5,cy-13);
+
+        }else{
+
+            ys.forEach(y=>{
+
+                xDef.save();
+
+                xDef.setLineDash([6,6]);
+                xDef.strokeStyle="#9ca3af";
+
+                xDef.beginPath();
+                xDef.moveTo(cx,y);
+                xDef.lineTo(focoX,cy);
+                xDef.stroke();
+
+                xDef.restore();
+            });
+
+            xDef.fillStyle="#111827";
+
+            xDef.beginPath();
+            xDef.arc(focoX,cy,5,0,Math.PI*2);
+            xDef.fill();
+
+            xDef.font="bold 16px Arial";
+            xDef.fillText("F",focoX-5,cy-13);
         }
-
-        if(comportamentoAtual==="divergente"){
-            marcarFoco(cx-focoDistancia,cy,"F");
-        }
     }
 }
 
-function marcarFoco(x,y,texto){
 
-    ctx.beginPath();
-    ctx.fillStyle="#111";
-    ctx.arc(x,y,5,0,Math.PI*2);
-    ctx.fill();
+function animarDef(){
 
-    ctx.font="bold 16px Arial";
-    ctx.fillText(texto,x-5,y-12);
-}
+    if(!rodandoDef)
+        return;
 
-function atualizarPainel(){
+    progressoDef+=.013;
 
-    const tipo = tipoLente.value;
+    if(progressoDef>=1){
 
-    infoTipo.textContent = nomes[tipo];
-    infoBordas.textContent = bordasDaLente(tipo);
+        progressoDef=1;
+        rodandoDef=false;
 
-    infoNLente.textContent =
-        parseFloat(nLenteInput.value)
-        .toFixed(2)
-        .replace(".",",");
-
-    infoNMeio.textContent =
-        parseFloat(nMeioInput.value)
-        .toFixed(2)
-        .replace(".",",");
-
-    r1Valor.textContent=r1Input.value;
-    r2Valor.textContent=r2Input.value;
-}
-
-function desenhar(){
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    desenharEixo();
-    desenharLente();
-
-    if(comportamentoAtual){
-        desenharRaios(progresso);
-    }
-}
-
-function iniciarAnimacao(){
-
-    const previsaoSelecionada =
-        document.querySelector(
-            'input[name="previsao"]:checked'
-        );
-
-    comportamentoAtual =
-        calcularComportamento();
-
-    progresso=0;
-    animando=true;
-
-    infoComportamento.textContent="Analisando...";
-    infoFoco.textContent="...";
-
-    resultado.className="resultado";
-
-    resultado.innerHTML=
-        "Observe a propagação dos raios luminosos.";
-
-    animar();
-}
-
-function animar(){
-
-    if(!animando) return;
-
-    progresso += 0.012;
-
-    if(progresso>=1){
-        progresso=1;
-        animando=false;
-        finalizar();
     }
 
-    desenhar();
+    desenharDef();
 
-    if(animando){
-        requestAnimationFrame(animar);
-    }
-}
+    if(rodandoDef){
 
-function finalizar(){
-
-    const previsaoSelecionada =
-        document.querySelector(
-            'input[name="previsao"]:checked'
-        );
-
-    if(comportamentoAtual==="convergente"){
-
-        infoComportamento.textContent="Convergente";
-        infoFoco.textContent="Real";
-
-    }else if(
-        comportamentoAtual==="divergente"
-    ){
-
-        infoComportamento.textContent="Divergente";
-        infoFoco.textContent="Virtual";
+        requestAnimationFrame(animarDef);
 
     }else{
 
-        infoComportamento.textContent="Sem desvio";
-        infoFoco.textContent="Não definido";
+        const comportamento=
+        comportamentoBasico(objetoDef.value);
+
+        textoDef.innerHTML=
+        "A luz atravessou a lente, sofreu <b>refração</b> e teve sua trajetória modificada. "+
+        "Neste exemplo, os raios apresentaram comportamento <b>"+
+        comportamento+
+        "</b>.";
+    }
+}
+
+
+document
+.getElementById("btnLuzDef")
+.onclick=()=>{
+
+    progressoDef=0;
+    rodandoDef=true;
+
+    textoDef.innerHTML=
+    "Observe os raios luminosos atravessando o sistema óptico.";
+
+    animarDef();
+};
+
+
+document
+.getElementById("btnResetDef")
+.onclick=()=>{
+
+    rodandoDef=false;
+    progressoDef=0;
+
+    textoDef.innerHTML=
+    "Escolha uma lente e clique em <b>Incidir luz</b>.";
+
+    desenharDef();
+};
+
+
+objetoDef.onchange=()=>{
+
+    rodandoDef=false;
+    progressoDef=0;
+
+    textoDef.innerHTML=
+    "Clique em <b>Incidir luz</b> para observar o comportamento da luz.";
+
+    desenharDef();
+};
+
+
+/* ============================================================
+   PARTE 2 — ELEMENTOS GEOMÉTRICOS
+============================================================ */
+
+const cEl =
+document.getElementById("canvasElementos");
+
+const xEl =
+cEl.getContext("2d");
+
+const textoElemento =
+document.getElementById("textoElemento");
+
+const contadorElemento =
+document.getElementById("contadorElemento");
+
+let etapaElemento=0;
+
+
+/*
+Geometria da lente utilizada nessa seção.
+
+V1 e V2 são exatamente os pontos em que
+as superfícies interceptam o eixo óptico.
+
+C1 e C2 são calculados a partir dos
+raios das próprias superfícies.
+*/
+
+const eixoElY=250;
+
+const V1={
+    x:515,
+    y:eixoElY
+};
+
+const V2={
+    x:585,
+    y:eixoElY
+};
+
+const R1el=230;
+const R2el=230;
+
+const C1={
+    x:V1.x+R1el,
+    y:eixoElY
+};
+
+const C2={
+    x:V2.x-R2el,
+    y:eixoElY
+};
+
+const O={
+    x:(V1.x+V2.x)/2,
+    y:eixoElY
+};
+
+
+const explicacoesElementos=[
+
+    "",
+
+    "<b>Eixo óptico:</b> linha de referência que passa pelo centro da lente.",
+
+    "<b>V₁:</b> vértice da primeira superfície. É o ponto em que a primeira superfície encontra o eixo óptico.",
+
+    "<b>V₂:</b> vértice da segunda superfície. É o ponto em que a segunda superfície encontra o eixo óptico.",
+
+    "<b>O:</b> centro óptico da lente.",
+
+    "<b>C₁:</b> centro de curvatura da primeira superfície esférica.",
+
+    "<b>C₂:</b> centro de curvatura da segunda superfície esférica.",
+
+    "<b>R₁:</b> raio de curvatura da primeira superfície. Corresponde à distância entre C₁ e V₁.",
+
+    "<b>R₂:</b> raio de curvatura da segunda superfície. Corresponde à distância entre C₂ e V₂.",
+
+    "<b>Esferas geradoras:</b> as superfícies curvas da lente correspondem a partes de superfícies esféricas."
+
+];
+
+
+function pontoEl(x,y,texto,pos="cima"){
+
+    xEl.fillStyle="#111827";
+
+    xEl.beginPath();
+    xEl.arc(x,y,5,0,Math.PI*2);
+    xEl.fill();
+
+    xEl.font="bold 16px Arial";
+
+    if(pos==="cima")
+        xEl.fillText(texto,x-8,y-13);
+    else
+        xEl.fillText(texto,x-8,y+25);
+}
+
+
+function circuloGerador(cx,cy,r){
+
+    xEl.save();
+
+    xEl.setLineDash([8,7]);
+    xEl.strokeStyle="rgba(100,116,139,.42)";
+    xEl.lineWidth=1.5;
+
+    xEl.beginPath();
+    xEl.arc(cx,cy,r,0,Math.PI*2);
+    xEl.stroke();
+
+    xEl.restore();
+}
+
+
+/*
+A própria lente abaixo é desenhada usando os
+círculos cujos centros são C1 e C2.
+*/
+
+function xSuperficieEsquerda(y){
+
+    const dy=y-eixoElY;
+
+    return C1.x -
+    Math.sqrt(
+        Math.max(
+            0,
+            R1el*R1el-dy*dy
+        )
+    );
+}
+
+
+function xSuperficieDireita(y){
+
+    const dy=y-eixoElY;
+
+    return C2.x +
+    Math.sqrt(
+        Math.max(
+            0,
+            R2el*R2el-dy*dy
+        )
+    );
+}
+
+
+function desenharLenteElementos(){
+
+    const topo=eixoElY-145;
+    const baixo=eixoElY+145;
+
+    xEl.beginPath();
+
+    let iniciou=false;
+
+    for(let y=topo;y<=baixo;y+=2){
+
+        const x=xSuperficieEsquerda(y);
+
+        if(!iniciou){
+
+            xEl.moveTo(x,y);
+            iniciou=true;
+
+        }else{
+
+            xEl.lineTo(x,y);
+        }
     }
 
-    if(!previsaoSelecionada){
+    for(let y=baixo;y>=topo;y-=2){
 
-        resultado.className="resultado";
+        xEl.lineTo(
+            xSuperficieDireita(y),
+            y
+        );
+    }
 
-        resultado.innerHTML=
-            "<b>Resultado:</b> a lente apresentou comportamento " +
-            "<b>"+comportamentoAtual+"</b>.";
+    xEl.closePath();
+
+    xEl.fillStyle="rgba(80,160,245,.26)";
+    xEl.strokeStyle="#2563eb";
+    xEl.lineWidth=3;
+
+    xEl.fill();
+    xEl.stroke();
+}
+
+
+function linhaRaioElemento(C,V,nome,offset){
+
+    xEl.strokeStyle="#475569";
+    xEl.lineWidth=2;
+
+    xEl.beginPath();
+
+    xEl.moveTo(
+        C.x,
+        eixoElY+offset
+    );
+
+    xEl.lineTo(
+        V.x,
+        eixoElY+offset
+    );
+
+    xEl.stroke();
+
+    xEl.beginPath();
+
+    xEl.moveTo(
+        C.x,
+        eixoElY+offset-6
+    );
+
+    xEl.lineTo(
+        C.x,
+        eixoElY+offset+6
+    );
+
+    xEl.moveTo(
+        V.x,
+        eixoElY+offset-6
+    );
+
+    xEl.lineTo(
+        V.x,
+        eixoElY+offset+6
+    );
+
+    xEl.stroke();
+
+    xEl.fillStyle="#334155";
+    xEl.font="bold 16px Arial";
+
+    xEl.fillText(
+        nome,
+        (C.x+V.x)/2-10,
+        eixoElY+offset-10
+    );
+}
+
+
+function desenharElementos(){
+
+    xEl.clearRect(
+        0,
+        0,
+        cEl.width,
+        cEl.height
+    );
+
+
+    /*
+    Esferas ficam atrás da lente.
+    Só aparecem na etapa 9.
+    */
+
+    if(etapaElemento>=9){
+
+        circuloGerador(
+            C1.x,
+            C1.y,
+            R1el
+        );
+
+        circuloGerador(
+            C2.x,
+            C2.y,
+            R2el
+        );
+    }
+
+
+    desenharLenteElementos();
+
+
+    if(etapaElemento>=1){
+
+        xEl.strokeStyle="#94a3b8";
+        xEl.lineWidth=2;
+
+        xEl.beginPath();
+
+        xEl.moveTo(
+            60,
+            eixoElY
+        );
+
+        xEl.lineTo(
+            cEl.width-60,
+            eixoElY
+        );
+
+        xEl.stroke();
+
+        xEl.fillStyle="#64748b";
+        xEl.font="15px Arial";
+
+        xEl.fillText(
+            "Eixo óptico",
+            cEl.width-150,
+            eixoElY-12
+        );
+    }
+
+
+    if(etapaElemento>=2){
+
+        pontoEl(
+            V1.x,
+            V1.y,
+            "V₁",
+            "baixo"
+        );
+    }
+
+
+    if(etapaElemento>=3){
+
+        pontoEl(
+            V2.x,
+            V2.y,
+            "V₂",
+            "baixo"
+        );
+    }
+
+
+    if(etapaElemento>=4){
+
+        pontoEl(
+            O.x,
+            O.y,
+            "O",
+            "cima"
+        );
+    }
+
+
+    if(etapaElemento>=5){
+
+        pontoEl(
+            C1.x,
+            C1.y,
+            "C₁",
+            "cima"
+        );
+    }
+
+
+    if(etapaElemento>=6){
+
+        pontoEl(
+            C2.x,
+            C2.y,
+            "C₂",
+            "cima"
+        );
+    }
+
+
+    if(etapaElemento>=7){
+
+        linhaRaioElemento(
+            C1,
+            V1,
+            "R₁",
+            -55
+        );
+    }
+
+
+    if(etapaElemento>=8){
+
+        linhaRaioElemento(
+            C2,
+            V2,
+            "R₂",
+            55
+        );
+    }
+}
+
+
+function atualizarEtapaElemento(){
+
+    contadorElemento.innerHTML=
+    etapaElemento+" / 9";
+
+    if(etapaElemento===0){
+
+        textoElemento.innerHTML=
+        "Clique em <b>Próximo</b> para iniciar.";
+
+    }else{
+
+        textoElemento.innerHTML=
+        explicacoesElementos[
+            etapaElemento
+        ];
+    }
+
+    desenharElementos();
+}
+
+
+document
+.getElementById("btnProximo")
+.onclick=()=>{
+
+    if(etapaElemento<9)
+        etapaElemento++;
+
+    atualizarEtapaElemento();
+};
+
+
+document
+.getElementById("btnAnterior")
+.onclick=()=>{
+
+    if(etapaElemento>0)
+        etapaElemento--;
+
+    atualizarEtapaElemento();
+};
+
+
+document
+.getElementById("btnResetElementos")
+.onclick=()=>{
+
+    etapaElemento=0;
+
+    atualizarEtapaElemento();
+};
+
+
+/* ============================================================
+   PARTE 3 — SEIS TIPOS DE LENTE
+============================================================ */
+
+const cartoes =
+[...document.querySelectorAll(".cartao-lente")];
+
+const detalheLente =
+document.getElementById("detalheLente");
+
+let intervaloClassificacao=null;
+let indiceClassificacao=0;
+
+
+const descricoesLentes={
+
+    biconvexa:
+    "<b>Biconvexa</b> — possui duas superfícies convexas e apresenta <b>bordas finas</b>.",
+
+    planoConvexa:
+    "<b>Plano-convexa</b> — possui uma superfície plana e uma superfície convexa. Apresenta <b>bordas finas</b>.",
+
+    concavoConvexa:
+    "<b>Côncavo-convexa</b> — possui uma superfície côncava e outra convexa. Nesta classificação apresenta <b>bordas finas</b>.",
+
+    biconcava:
+    "<b>Bicôncava</b> — possui duas superfícies côncavas e apresenta <b>bordas espessas</b>.",
+
+    planoConcava:
+    "<b>Plano-côncava</b> — possui uma superfície plana e uma superfície côncava. Apresenta <b>bordas espessas</b>.",
+
+    convexoConcava:
+    "<b>Convexo-côncava</b> — possui uma superfície convexa e outra côncava. Nesta classificação apresenta <b>bordas espessas</b>."
+};
+
+
+function desenharMiniLentes(){
+
+    cartoes.forEach(cartao=>{
+
+        const canvas =
+        cartao.querySelector("canvas");
+
+        const ctx =
+        canvas.getContext("2d");
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        ctx.strokeStyle="#d1d5db";
+        ctx.lineWidth=1;
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            25,
+            canvas.height/2
+        );
+
+        ctx.lineTo(
+            canvas.width-25,
+            canvas.height/2
+        );
+
+        ctx.stroke();
+
+        desenharFormatoLente(
+            ctx,
+            canvas.width/2,
+            canvas.height/2,
+            120,
+            cartao.dataset.lente,
+            .7
+        );
+    });
+}
+
+
+function destacarCartao(indice){
+
+    cartoes.forEach(
+        c=>c.classList.remove("ativo")
+    );
+
+    const cartao=
+    cartoes[indice];
+
+    cartao.classList.add("ativo");
+
+    detalheLente.innerHTML=
+    descricoesLentes[
+        cartao.dataset.lente
+    ];
+
+    cartao.scrollIntoView({
+        behavior:"smooth",
+        block:"nearest"
+    });
+}
+
+
+cartoes.forEach((cartao,i)=>{
+
+    cartao.onclick=()=>{
+
+        clearInterval(
+            intervaloClassificacao
+        );
+
+        destacarCartao(i);
+    };
+});
+
+
+document
+.getElementById("btnClassificar")
+.onclick=()=>{
+
+    clearInterval(
+        intervaloClassificacao
+    );
+
+    indiceClassificacao=0;
+
+    destacarCartao(
+        indiceClassificacao
+    );
+
+    intervaloClassificacao=
+    setInterval(()=>{
+
+        indiceClassificacao++;
+
+        if(
+            indiceClassificacao>=
+            cartoes.length
+        ){
+
+            clearInterval(
+                intervaloClassificacao
+            );
+
+            detalheLente.innerHTML=
+            "<b>Resumo:</b> as três primeiras lentes possuem <b>bordas finas</b>; as três seguintes possuem <b>bordas espessas</b>.";
+
+            return;
+        }
+
+        destacarCartao(
+            indiceClassificacao
+        );
+
+    },2600);
+};
+
+
+document
+.getElementById("btnPararClassificacao")
+.onclick=()=>{
+
+    clearInterval(
+        intervaloClassificacao
+    );
+
+    cartoes.forEach(
+        c=>c.classList.remove("ativo")
+    );
+
+    detalheLente.innerHTML=
+    "Clique em uma lente ou inicie a classificação automática.";
+};
+
+
+/* ============================================================
+   PARTE 4 — CONVERGÊNCIA E DIVERGÊNCIA
+============================================================ */
+
+const cFinal =
+document.getElementById("canvasFinal");
+
+const xFinal =
+cFinal.getContext("2d");
+
+const tipoFinal =
+document.getElementById("tipoFinal");
+
+const bordasFinal =
+document.getElementById("bordasFinal");
+
+const nLenteFinal =
+document.getElementById("nLenteFinal");
+
+const nMeioFinal =
+document.getElementById("nMeioFinal");
+
+const resultadoFinal =
+document.getElementById("resultadoFinal");
+
+const rTipo =
+document.getElementById("rTipo");
+
+const rBorda =
+document.getElementById("rBorda");
+
+const rComp =
+document.getElementById("rComp");
+
+const rFoco =
+document.getElementById("rFoco");
+
+let progressoFinal=0;
+let rodandoFinal=false;
+let comportamentoFinal=null;
+
+
+function calcularComportamentoFinal(){
+
+    const nl=
+    Number(nLenteFinal.value);
+
+    const nm=
+    Number(nMeioFinal.value);
+
+    const bordas=
+    bordaLente(tipoFinal.value);
+
+    if(
+        !Number.isFinite(nl) ||
+        !Number.isFinite(nm) ||
+        nl<=0 ||
+        nm<=0
+    ){
+        return "invalido";
+    }
+
+    if(Math.abs(nl-nm)<0.000001)
+        return "neutro";
+
+    if(nl>nm){
+
+        return bordas==="Finas"
+            ? "convergente"
+            : "divergente";
+    }
+
+    return bordas==="Finas"
+        ? "divergente"
+        : "convergente";
+}
+
+
+function atualizarFinal(){
+
+    const bordas=
+    bordaLente(tipoFinal.value);
+
+    bordasFinal.value=
+    bordas;
+
+    rTipo.textContent=
+    nomes[tipoFinal.value];
+
+    rBorda.textContent=
+    bordas;
+
+    rComp.textContent="—";
+    rFoco.textContent="—";
+
+    progressoFinal=0;
+    comportamentoFinal=null;
+
+    desenharFinal();
+}
+
+
+function desenharFinal(){
+
+    xFinal.clearRect(
+        0,
+        0,
+        cFinal.width,
+        cFinal.height
+    );
+
+    const cx=455;
+    const cy=235;
+
+    xFinal.strokeStyle="#9ca3af";
+    xFinal.lineWidth=1.5;
+
+    xFinal.beginPath();
+
+    xFinal.moveTo(
+        35,
+        cy
+    );
+
+    xFinal.lineTo(
+        cFinal.width-35,
+        cy
+    );
+
+    xFinal.stroke();
+
+    xFinal.fillStyle="#64748b";
+    xFinal.font="14px Arial";
+
+    xFinal.fillText(
+        "Eixo óptico",
+        cFinal.width-125,
+        cy-10
+    );
+
+    desenharFormatoLente(
+        xFinal,
+        cx,
+        cy,
+        260,
+        tipoFinal.value,
+        1
+    );
+
+
+    if(
+        !comportamentoFinal ||
+        comportamentoFinal==="invalido"
+    )
+        return;
+
+
+    const ys=[
+        cy-85,
+        cy-42,
+        cy,
+        cy+42,
+        cy+85
+    ];
+
+    const inicioX=50;
+    const finalX=cFinal.width-60;
+    const distanciaFoco=225;
+
+    ys.forEach(y=>{
+
+        const etapaEntrada=
+        Math.min(
+            progressoFinal*2,
+            1
+        );
+
+        const entradaAtual=
+        inicioX+
+        (cx-inicioX)*etapaEntrada;
+
+        xFinal.strokeStyle="#2563eb";
+        xFinal.lineWidth=2.5;
+
+        xFinal.beginPath();
+
+        xFinal.moveTo(
+            inicioX,
+            y
+        );
+
+        xFinal.lineTo(
+            entradaAtual,
+            y
+        );
+
+        xFinal.stroke();
+
+
+        if(progressoFinal<=.5)
+            return;
+
+
+        const etapaSaida=
+        Math.min(
+            (progressoFinal-.5)*2,
+            1
+        );
+
+
+        if(comportamentoFinal==="neutro"){
+
+            const xa=
+            cx+
+            (finalX-cx)*etapaSaida;
+
+            xFinal.strokeStyle="#dc2626";
+
+            xFinal.beginPath();
+
+            xFinal.moveTo(cx,y);
+            xFinal.lineTo(xa,y);
+
+            xFinal.stroke();
+
+            return;
+        }
+
+
+        let destinoY;
+
+        if(
+            comportamentoFinal==="convergente"
+        ){
+
+            const focoX=
+            cx+distanciaFoco;
+
+            const m=
+            (cy-y)/(focoX-cx);
+
+            destinoY=
+            y+
+            m*(finalX-cx);
+
+        }else{
+
+            const focoVirtual=
+            cx-distanciaFoco;
+
+            const m=
+            (y-cy)/
+            (cx-focoVirtual);
+
+            destinoY=
+            y+
+            m*(finalX-cx);
+        }
+
+
+        const xa=
+        cx+
+        (finalX-cx)*etapaSaida;
+
+        const ya=
+        y+
+        (destinoY-y)*etapaSaida;
+
+        xFinal.strokeStyle="#dc2626";
+
+        xFinal.beginPath();
+
+        xFinal.moveTo(cx,y);
+        xFinal.lineTo(xa,ya);
+
+        xFinal.stroke();
+
+
+        if(
+            progressoFinal>=1 &&
+            comportamentoFinal==="divergente"
+        ){
+
+            xFinal.save();
+
+            xFinal.setLineDash([6,6]);
+            xFinal.strokeStyle="#9ca3af";
+
+            xFinal.beginPath();
+
+            xFinal.moveTo(cx,y);
+
+            xFinal.lineTo(
+                cx-distanciaFoco,
+                cy
+            );
+
+            xFinal.stroke();
+
+            xFinal.restore();
+        }
+
+    });
+
+
+    if(progressoFinal>=1){
+
+        let focoX;
+
+        if(
+            comportamentoFinal===
+            "convergente"
+        ){
+
+            focoX=
+            cx+distanciaFoco;
+
+        }else if(
+            comportamentoFinal===
+            "divergente"
+        ){
+
+            focoX=
+            cx-distanciaFoco;
+
+        }else{
+
+            return;
+        }
+
+
+        xFinal.fillStyle="#111827";
+
+        xFinal.beginPath();
+
+        xFinal.arc(
+            focoX,
+            cy,
+            5,
+            0,
+            Math.PI*2
+        );
+
+        xFinal.fill();
+
+        xFinal.font=
+        "bold 16px Arial";
+
+        xFinal.fillText(
+            "F",
+            focoX-5,
+            cy-13
+        );
+    }
+}
+
+
+function iniciarFinal(){
+
+    comportamentoFinal=
+    calcularComportamentoFinal();
+
+    if(
+        comportamentoFinal==="invalido"
+    ){
+
+        resultadoFinal.className=
+        "caixa-info aviso";
+
+        resultadoFinal.innerHTML=
+        "Digite índices de refração válidos e maiores que zero.";
 
         return;
     }
 
-    const previsao =
-        previsaoSelecionada.value;
+    progressoFinal=0;
+    rodandoFinal=true;
 
-    if(previsao===comportamentoAtual){
+    rComp.textContent=
+    "Analisando...";
 
-        resultado.className=
-            "resultado correto";
+    rFoco.textContent="...";
 
-        resultado.innerHTML=
-            "✅ <b>Previsão correta!</b><br>" +
-            explicarResultado();
+    resultadoFinal.className=
+    "caixa-info";
+
+    resultadoFinal.innerHTML=
+    "Observe o comportamento dos raios.";
+
+    animarFinal();
+}
+
+
+function animarFinal(){
+
+    if(!rodandoFinal)
+        return;
+
+    progressoFinal+=.012;
+
+    if(progressoFinal>=1){
+
+        progressoFinal=1;
+        rodandoFinal=false;
+    }
+
+    desenharFinal();
+
+    if(rodandoFinal){
+
+        requestAnimationFrame(
+            animarFinal
+        );
 
     }else{
 
-        resultado.className=
-            "resultado errado";
-
-        resultado.innerHTML=
-            "❌ <b>Sua previsão não corresponde ao resultado.</b><br>" +
-            explicarResultado();
+        finalizarFinal();
     }
 }
 
-function explicarResultado(){
 
-    const nLente =
-        parseFloat(nLenteInput.value);
-
-    const nMeio =
-        parseFloat(nMeioInput.value);
-
-    const bordas =
-        bordasDaLente(tipoLente.value);
+function finalizarFinal(){
 
     if(
-        Math.abs(nLente-nMeio)<0.0001
+        comportamentoFinal==="convergente"
     ){
-        return "Como os índices de refração são iguais, praticamente não ocorre desvio dos raios.";
+
+        rComp.textContent=
+        "Convergente";
+
+        rFoco.textContent=
+        "Real";
     }
 
-    return (
-        "A lente possui <b>bordas " +
-        bordas.toLowerCase() +
-        "</b> e está em um meio com " +
-        "n<sub>lente</sub> = " +
-        nLente.toFixed(2).replace(".",",") +
-        " e n<sub>meio</sub> = " +
-        nMeio.toFixed(2).replace(".",",") +
-        ". Nesse caso, ela se comporta como uma lente <b>" +
-        comportamentoAtual +
-        "</b>."
+    else if(
+        comportamentoFinal==="divergente"
+    ){
+
+        rComp.textContent=
+        "Divergente";
+
+        rFoco.textContent=
+        "Virtual";
+    }
+
+    else{
+
+        rComp.textContent=
+        "Sem desvio";
+
+        rFoco.textContent=
+        "—";
+    }
+
+
+    const previsao=
+    document.querySelector(
+        'input[name="previsaoFinal"]:checked'
     );
+
+    const bordas=
+    bordaLente(
+        tipoFinal.value
+    );
+
+    const nl=
+    Number(
+        nLenteFinal.value
+    );
+
+    const nm=
+    Number(
+        nMeioFinal.value
+    );
+
+
+    if(
+        comportamentoFinal==="neutro"
+    ){
+
+        resultadoFinal.className=
+        "caixa-info aviso";
+
+        resultadoFinal.innerHTML=
+        "Como <b>n da lente = n do meio</b>, não há mudança de direção associada à passagem entre meios de índices diferentes.";
+
+        return;
+    }
+
+
+    let explicacao=
+
+    "A lente possui <b>"+
+    bordas.toLowerCase()+
+    "</b>. Como n<sub>lente</sub> = "+
+    nl.toFixed(2).replace(".",",")+
+    " e n<sub>meio</sub> = "+
+    nm.toFixed(2).replace(".",",")+
+    ", nesta situação ela apresenta comportamento <b>"+
+    comportamentoFinal+
+    "</b>.";
+
+
+    if(!previsao){
+
+        resultadoFinal.className=
+        "caixa-info";
+
+        resultadoFinal.innerHTML=
+        explicacao;
+
+        return;
+    }
+
+
+    if(
+        previsao.value===
+        comportamentoFinal
+    ){
+
+        resultadoFinal.className=
+        "caixa-info correto";
+
+        resultadoFinal.innerHTML=
+        "✅ <b>Previsão correta!</b><br>"+
+        explicacao;
+
+    }else{
+
+        resultadoFinal.className=
+        "caixa-info errado";
+
+        resultadoFinal.innerHTML=
+        "❌ <b>A previsão não corresponde ao resultado.</b><br>"+
+        explicacao;
+    }
 }
 
-function resetar(){
-
-    tipoLente.value="biconvexa";
-
-    r1Input.value=150;
-    r2Input.value=150;
-
-    nLenteInput.value=1.50;
-    nMeioInput.value=1.00;
-
-    mostrarElementos.checked=false;
-
-    document.querySelectorAll(
-        'input[name="previsao"]'
-    ).forEach(r=>r.checked=false);
-
-    comportamentoAtual=null;
-    progresso=0;
-    animando=false;
-
-    infoComportamento.textContent="---";
-    infoFoco.textContent="---";
-
-    resultado.className="resultado";
-
-    resultado.innerHTML=
-        'Escolha os parâmetros, faça sua previsão e clique em <b>Propagar luz</b>.';
-
-    atualizarPainel();
-    desenhar();
-}
-
-[
-    tipoLente,
-    r1Input,
-    r2Input,
-    nLenteInput,
-    nMeioInput,
-    mostrarElementos
-].forEach(elemento=>{
-
-    elemento.addEventListener("input",()=>{
-        atualizarPainel();
-        desenhar();
-    });
-
-    elemento.addEventListener("change",()=>{
-        atualizarPainel();
-        desenhar();
-    });
-
-});
 
 document
-.getElementById("btnPropagar")
-.addEventListener("click",iniciarAnimacao);
+.getElementById("btnPropagarFinal")
+.onclick=iniciarFinal;
+
 
 document
-.getElementById("btnReset")
-.addEventListener("click",resetar);
+.getElementById("btnResetFinal")
+.onclick=()=>{
 
-atualizarPainel();
-desenhar();
+    tipoFinal.value=
+    "biconvexa";
+
+    nLenteFinal.value=
+    "1.50";
+
+    nMeioFinal.value=
+    "1.00";
+
+    document
+    .querySelectorAll(
+        'input[name="previsaoFinal"]'
+    )
+    .forEach(
+        el=>el.checked=false
+    );
+
+    rodandoFinal=false;
+    progressoFinal=0;
+    comportamentoFinal=null;
+
+    resultadoFinal.className=
+    "caixa-info";
+
+    resultadoFinal.innerHTML=
+    "Faça sua previsão e clique em <b>Propagar luz</b>.";
+
+    atualizarFinal();
+};
+
+
+tipoFinal.onchange=
+atualizarFinal;
+
+nLenteFinal.oninput=()=>{
+
+    rodandoFinal=false;
+    progressoFinal=0;
+    comportamentoFinal=null;
+
+    rComp.textContent="—";
+    rFoco.textContent="—";
+
+    desenharFinal();
+};
+
+nMeioFinal.oninput=()=>{
+
+    rodandoFinal=false;
+    progressoFinal=0;
+    comportamentoFinal=null;
+
+    rComp.textContent="—";
+    rFoco.textContent="—";
+
+    desenharFinal();
+};
+
+
+/* ============================================================
+   INICIALIZAÇÃO
+============================================================ */
+
+desenharDef();
+
+atualizarEtapaElemento();
+
+desenharMiniLentes();
+
+atualizarFinal();
 
 </script>
 
