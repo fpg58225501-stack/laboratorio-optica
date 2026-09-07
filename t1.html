@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laboratório Virtual de Lentes</title>
+
+<style>
+    *{
+        box-sizing:border-box;
+        margin:0;
+        padding:0;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background:#f3f4f6;
+        color:#222;
+        min-height:100vh;
+        padding:20px;
+    }
+
+    .container{
+        max-width:1400px;
+        margin:auto;
+    }
+
+    h1{
+        text-align:center;
+        margin-bottom:8px;
+        font-size:32px;
+    }
+
+    .subtitulo{
+        text-align:center;
+        margin-bottom:22px;
+        color:#555;
+        font-size:16px;
+    }
+
+    .layout{
+        display:grid;
+        grid-template-columns:340px 1fr;
+        gap:20px;
+        align-items:start;
+    }
+
+    .painel{
+        background:white;
+        border-radius:16px;
+        padding:18px;
+        box-shadow:0 4px 18px rgba(0,0,0,.08);
+    }
+
+    .painel h2{
+        font-size:20px;
+        margin-bottom:14px;
+    }
+
+    .grupo{
+        margin-bottom:16px;
+    }
+
+    label{
+        display:block;
+        font-weight:bold;
+        margin-bottom:6px;
+        font-size:14px;
+    }
+
+    select,
+    input[type="number"]{
+        width:100%;
+        padding:10px;
+        border:1px solid #ccc;
+        border-radius:8px;
+        font-size:15px;
+    }
+
+    input[type="range"]{
+        width:100%;
+    }
+
+    .linha{
+        display:flex;
+        gap:10px;
+    }
+
+    .linha > div{
+        flex:1;
+    }
+
+    .valor{
+        font-size:13px;
+        color:#555;
+        margin-top:4px;
+    }
+
+    .checkbox{
+        display:flex;
+        align-items:center;
+        gap:8px;
+        margin-top:10px;
+        font-size:14px;
+    }
+
+    .checkbox input{
+        transform:scale(1.15);
+    }
+
+    .previsao{
+        background:#f8fafc;
+        border:1px solid #ddd;
+        padding:12px;
+        border-radius:10px;
+        margin-top:10px;
+    }
+
+    .previsao p{
+        font-weight:bold;
+        margin-bottom:8px;
+    }
+
+    .opcao{
+        margin:6px 0;
+    }
+
+    button{
+        width:100%;
+        border:none;
+        border-radius:10px;
+        padding:12px;
+        font-size:15px;
+        font-weight:bold;
+        cursor:pointer;
+        margin-top:8px;
+    }
+
+    .btn-principal{
+        background:#111827;
+        color:white;
+    }
+
+    .btn-secundario{
+        background:#e5e7eb;
+        color:#222;
+    }
+
+    .area-simulacao{
+        background:white;
+        border-radius:16px;
+        box-shadow:0 4px 18px rgba(0,0,0,.08);
+        padding:14px;
+    }
+
+    canvas{
+        width:100%;
+        height:560px;
+        border-radius:12px;
+        background:#ffffff;
+        display:block;
+        border:1px solid #ddd;
+    }
+
+    .info{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:10px;
+        margin-top:14px;
+    }
+
+    .card{
+        background:#f8fafc;
+        border:1px solid #ddd;
+        border-radius:10px;
+        padding:12px;
+        text-align:center;
+    }
+
+    .card span{
+        display:block;
+        font-size:12px;
+        color:#666;
+        margin-bottom:4px;
+    }
+
+    .card strong{
+        font-size:16px;
+    }
+
+    .resultado{
+        margin-top:14px;
+        padding:14px;
+        border-radius:10px;
+        background:#f3f4f6;
+        border-left:5px solid #111827;
+        font-size:15px;
+        line-height:1.5;
+    }
+
+    .correto{
+        background:#ecfdf5;
+        border-left-color:#16a34a;
+    }
+
+    .errado{
+        background:#fef2f2;
+        border-left-color:#dc2626;
+    }
+
+    @media(max-width:900px){
+        .layout{
+            grid-template-columns:1fr;
+        }
+
+        canvas{
+            height:480px;
+        }
+
+        .info{
+            grid-template-columns:1fr 1fr;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Laboratório Virtual de Lentes</h1>
+    <div class="subtitulo">
+        Elementos geométricos, refração, convergência e divergência
+    </div>
+
+    <div class="layout">
+
+        <div class="painel">
+
+            <h2>Controles</h2>
+
+            <div class="grupo">
+                <label>Tipo de lente</label>
+                <select id="tipoLente">
+                    <option value="biconvexa">Biconvexa</option>
+                    <option value="planoConvexa">Plano-convexa</option>
+                    <option value="concavoConvexa">Côncavo-convexa</option>
+                    <option value="biconcava">Bicôncava</option>
+                    <option value="planoConcava">Plano-côncava</option>
+                    <option value="convexoConcava">Convexo-côncava</option>
+                </select>
+            </div>
+
+            <div class="grupo">
+                <label>Raio de curvatura R₁</label>
+                <input id="r1" type="range" min="80" max="300" value="150">
+                <div class="valor">
+                    R₁ = <span id="r1Valor">150</span> u.a.
+                </div>
+            </div>
+
+            <div class="grupo">
+                <label>Raio de curvatura R₂</label>
+                <input id="r2" type="range" min="80" max="300" value="150">
+                <div class="valor">
+                    R₂ = <span id="r2Valor">150</span> u.a.
+                </div>
+            </div>
+
+            <div class="linha">
+
+                <div class="grupo">
+                    <label>n da lente</label>
+                    <input id="nLente" type="number" step="0.01" value="1.50">
+                </div>
+
+                <div class="grupo">
+                    <label>n do meio</label>
+                    <input id="nMeio" type="number" step="0.01" value="1.00">
+                </div>
+
+            </div>
+
+            <div class="checkbox">
+                <input type="checkbox" id="mostrarElementos">
+                <label for="mostrarElementos" style="margin:0;">
+                    Mostrar elementos geométricos
+                </label>
+            </div>
+
+            <div class="previsao">
+                <p>Antes de testar, faça sua previsão:</p>
+
+                <div class="opcao">
+                    <input type="radio" name="previsao" value="convergente" id="prevConv">
+                    <label for="prevConv" style="display:inline;font-weight:normal;">
+                        Os raios irão convergir
+                    </label>
+                </div>
+
+                <div class="opcao">
+                    <input type="radio" name="previsao" value="divergente" id="prevDiv">
+                    <label for="prevDiv" style="display:inline;font-weight:normal;">
+                        Os raios irão divergir
+                    </label>
+                </div>
+            </div>
+
+            <button class="btn-principal" id="btnPropagar">
+                ▶ PROPAGAR LUZ
+            </button>
+
+            <button class="btn-secundario" id="btnReset">
+                RESETAR
+            </button>
+
+        </div>
+
+        <div class="area-simulacao">
+
+            <canvas id="canvas" width="1000" height="560"></canvas>
+
+            <div class="info">
+
+                <div class="card">
+                    <span>Tipo geométrico</span>
+                    <strong id="infoTipo">Biconvexa</strong>
+                </div>
+
+                <div class="card">
+                    <span>Bordas</span>
+                    <strong id="infoBordas">Finas</strong>
+                </div>
+
+                <div class="card">
+                    <span>Comportamento</span>
+                    <strong id="infoComportamento">---</strong>
+                </div>
+
+                <div class="card">
+                    <span>n lente</span>
+                    <strong id="infoNLente">1,50</strong>
+                </div>
+
+                <div class="card">
+                    <span>n meio</span>
+                    <strong id="infoNMeio">1,00</strong>
+                </div>
+
+                <div class="card">
+                    <span>Foco</span>
+                    <strong id="infoFoco">---</strong>
+                </div>
+
+            </div>
+
+            <div id="resultado" class="resultado">
+                Escolha os parâmetros, faça sua previsão e clique em
+                <b>Propagar luz</b>.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+const tipoLente = document.getElementById("tipoLente");
+const r1Input = document.getElementById("r1");
+const r2Input = document.getElementById("r2");
+const nLenteInput = document.getElementById("nLente");
+const nMeioInput = document.getElementById("nMeio");
+const mostrarElementos = document.getElementById("mostrarElementos");
+
+const r1Valor = document.getElementById("r1Valor");
+const r2Valor = document.getElementById("r2Valor");
+
+const infoTipo = document.getElementById("infoTipo");
+const infoBordas = document.getElementById("infoBordas");
+const infoComportamento = document.getElementById("infoComportamento");
+const infoNLente = document.getElementById("infoNLente");
+const infoNMeio = document.getElementById("infoNMeio");
+const infoFoco = document.getElementById("infoFoco");
+
+const resultado = document.getElementById("resultado");
+
+let animando = false;
+let progresso = 0;
+let comportamentoAtual = null;
+
+const nomes = {
+    biconvexa: "Biconvexa",
+    planoConvexa: "Plano-convexa",
+    concavoConvexa: "Côncavo-convexa",
+    biconcava: "Bicôncava",
+    planoConcava: "Plano-côncava",
+    convexoConcava: "Convexo-côncava"
+};
+
+function bordasDaLente(tipo){
+
+    if(
+        tipo === "biconvexa" ||
+        tipo === "planoConvexa" ||
+        tipo === "concavoConvexa"
+    ){
+        return "Finas";
+    }
+
+    return "Espessas";
+}
+
+function calcularComportamento(){
+
+    const tipo = tipoLente.value;
+    const nLente = parseFloat(nLenteInput.value);
+    const nMeio = parseFloat(nMeioInput.value);
+
+    const bordas = bordasDaLente(tipo);
+
+    if(Math.abs(nLente - nMeio) < 0.0001){
+        return "neutra";
+    }
+
+    if(nLente > nMeio){
+
+        if(bordas === "Finas"){
+            return "convergente";
+        }else{
+            return "divergente";
+        }
+
+    }else{
+
+        if(bordas === "Finas"){
+            return "divergente";
+        }else{
+            return "convergente";
+        }
+    }
+}
+
+function desenharEixo(){
+
+    ctx.beginPath();
+    ctx.strokeStyle = "#777";
+    ctx.lineWidth = 1.5;
+    ctx.moveTo(30, canvas.height/2);
+    ctx.lineTo(canvas.width-30, canvas.height/2);
+    ctx.stroke();
+
+    ctx.fillStyle="#555";
+    ctx.font="14px Arial";
+    ctx.fillText(
+        "Eixo óptico",
+        canvas.width-110,
+        canvas.height/2-8
+    );
+}
+
+function desenharLente(){
+
+    const tipo = tipoLente.value;
+
+    const cx = canvas.width/2;
+    const cy = canvas.height/2;
+
+    const h = 250;
+    const topo = cy-h/2;
+    const baixo = cy+h/2;
+
+    ctx.save();
+
+    ctx.beginPath();
+
+    if(tipo === "biconvexa"){
+
+        ctx.moveTo(cx, topo);
+
+        ctx.bezierCurveTo(
+            cx-85, topo+45,
+            cx-85, baixo-45,
+            cx, baixo
+        );
+
+        ctx.bezierCurveTo(
+            cx+85, baixo-45,
+            cx+85, topo+45,
+            cx, topo
+        );
+
+    }
+
+    if(tipo === "planoConvexa"){
+
+        ctx.moveTo(cx-35, topo);
+        ctx.lineTo(cx-35, baixo);
+
+        ctx.bezierCurveTo(
+            cx+90, baixo-35,
+            cx+90, topo+35,
+            cx-35, topo
+        );
+
+    }
+
+    if(tipo === "concavoConvexa"){
+
+        ctx.moveTo(cx-35, topo);
+
+        ctx.bezierCurveTo(
+            cx-75, topo+45,
+            cx-75, baixo-45,
+            cx-35, baixo
+        );
+
+        ctx.bezierCurveTo(
+            cx+100, baixo-30,
+            cx+100, topo+30,
+            cx-35, topo
+        );
+
+    }
+
+    if(tipo === "biconcava"){
+
+        ctx.moveTo(cx-55, topo);
+
+        ctx.bezierCurveTo(
+            cx+5, topo+55,
+            cx+5, baixo-55,
+            cx-55, baixo
+        );
+
+        ctx.lineTo(cx+55, baixo);
+
+        ctx.bezierCurveTo(
+            cx-5, baixo-55,
+            cx-5, topo+55,
+            cx+55, topo
+        );
+
+        ctx.closePath();
+    }
+
+    if(tipo === "planoConcava"){
+
+        ctx.moveTo(cx-35, topo);
+        ctx.lineTo(cx-35, baixo);
+
+        ctx.lineTo(cx+55, baixo);
+
+        ctx.bezierCurveTo(
+            cx-5, baixo-55,
+            cx-5, topo+55,
+            cx+55, topo
+        );
+
+        ctx.closePath();
+    }
+
+    if(tipo === "convexoConcava"){
+
+        ctx.moveTo(cx-55, topo);
+
+        ctx.bezierCurveTo(
+            cx+70, topo+30,
+            cx+70, baixo-30,
+            cx-55, baixo
+        );
+
+        ctx.bezierCurveTo(
+            cx-10, baixo-60,
+            cx-10, topo+60,
+            cx-55, topo
+        );
+
+    }
+
+    ctx.fillStyle="rgba(120,190,255,0.32)";
+    ctx.strokeStyle="#2563eb";
+    ctx.lineWidth=3;
+
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.restore();
+
+    if(mostrarElementos.checked){
+        desenharElementosGeometricos();
+    }
+}
+
+function desenharElementosGeometricos(){
+
+    const cx = canvas.width/2;
+    const cy = canvas.height/2;
+
+    const c1x = cx-170;
+    const c2x = cx+170;
+
+    ctx.save();
+
+    ctx.setLineDash([7,6]);
+    ctx.strokeStyle="#999";
+    ctx.lineWidth=1;
+
+    ctx.beginPath();
+    ctx.arc(c1x,cy,150,0,Math.PI*2);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(c2x,cy,150,0,Math.PI*2);
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+
+    marcarPonto(c1x,cy,"C₁");
+    marcarPonto(c2x,cy,"C₂");
+
+    marcarPonto(cx-35,cy,"V₁");
+    marcarPonto(cx+35,cy,"V₂");
+
+    marcarPonto(cx,cy,"O");
+
+    ctx.strokeStyle="#555";
+
+    ctx.beginPath();
+    ctx.moveTo(c1x,cy-30);
+    ctx.lineTo(cx-35,cy-30);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(cx+35,cy+30);
+    ctx.lineTo(c2x,cy+30);
+    ctx.stroke();
+
+    ctx.fillStyle="#333";
+    ctx.font="14px Arial";
+
+    ctx.fillText("R₁", (c1x+cx-35)/2, cy-38);
+    ctx.fillText("R₂", (c2x+cx+35)/2, cy+48);
+
+    ctx.restore();
+}
+
+function marcarPonto(x,y,texto){
+
+    ctx.beginPath();
+    ctx.fillStyle="#111";
+    ctx.arc(x,y,4,0,Math.PI*2);
+    ctx.fill();
+
+    ctx.font="14px Arial";
+    ctx.fillText(texto,x+7,y-8);
+}
+
+function desenharRaios(progressoAnimacao){
+
+    if(!comportamentoAtual) return;
+
+    const cx = canvas.width/2;
+    const cy = canvas.height/2;
+
+    const inicioX = 70;
+    const lenteX = cx;
+
+    const alturas = [-90,-45,0,45,90];
+
+    const focoDistancia = 210;
+
+    alturas.forEach(offset => {
+
+        const yi = cy+offset;
+
+        const pEntrada = Math.min(progressoAnimacao*2,1);
+
+        let xAtual = inicioX +
+            (lenteX-inicioX)*pEntrada;
+
+        ctx.strokeStyle="#2563eb";
+        ctx.lineWidth=2.5;
+
+        ctx.beginPath();
+        ctx.moveTo(inicioX,yi);
+        ctx.lineTo(xAtual,yi);
+        ctx.stroke();
+
+        if(progressoAnimacao <= 0.5){
+            return;
+        }
+
+        const pSaida =
+            Math.min((progressoAnimacao-0.5)*2,1);
+
+        let finalX = canvas.width-80;
+        let finalY;
+
+        if(comportamentoAtual === "convergente"){
+
+            const focoX = cx+focoDistancia;
+
+            const slope =
+                (cy-yi)/(focoX-cx);
+
+            finalY =
+                yi+slope*(finalX-cx);
+
+        }else if(
+            comportamentoAtual === "divergente"
+        ){
+
+            const focoVirtual = cx-focoDistancia;
+
+            const slope =
+                (yi-cy)/(cx-focoVirtual);
+
+            finalY =
+                yi+slope*(finalX-cx);
+
+        }else{
+
+            finalY=yi;
+        }
+
+        const xa =
+            lenteX+
+            (finalX-lenteX)*pSaida;
+
+        const ya =
+            yi+
+            (finalY-yi)*pSaida;
+
+        ctx.strokeStyle="#ef4444";
+
+        ctx.beginPath();
+        ctx.moveTo(lenteX,yi);
+        ctx.lineTo(xa,ya);
+        ctx.stroke();
+
+        if(
+            comportamentoAtual === "divergente" &&
+            progressoAnimacao >= 1
+        ){
+
+            const focoVirtual = cx-focoDistancia;
+
+            ctx.save();
+            ctx.setLineDash([6,6]);
+            ctx.strokeStyle="#999";
+
+            ctx.beginPath();
+            ctx.moveTo(lenteX,yi);
+            ctx.lineTo(focoVirtual,cy);
+            ctx.stroke();
+
+            ctx.restore();
+        }
+    });
+
+    if(progressoAnimacao>=1){
+
+        if(comportamentoAtual==="convergente"){
+            marcarFoco(cx+focoDistancia,cy,"F");
+        }
+
+        if(comportamentoAtual==="divergente"){
+            marcarFoco(cx-focoDistancia,cy,"F");
+        }
+    }
+}
+
+function marcarFoco(x,y,texto){
+
+    ctx.beginPath();
+    ctx.fillStyle="#111";
+    ctx.arc(x,y,5,0,Math.PI*2);
+    ctx.fill();
+
+    ctx.font="bold 16px Arial";
+    ctx.fillText(texto,x-5,y-12);
+}
+
+function atualizarPainel(){
+
+    const tipo = tipoLente.value;
+
+    infoTipo.textContent = nomes[tipo];
+    infoBordas.textContent = bordasDaLente(tipo);
+
+    infoNLente.textContent =
+        parseFloat(nLenteInput.value)
+        .toFixed(2)
+        .replace(".",",");
+
+    infoNMeio.textContent =
+        parseFloat(nMeioInput.value)
+        .toFixed(2)
+        .replace(".",",");
+
+    r1Valor.textContent=r1Input.value;
+    r2Valor.textContent=r2Input.value;
+}
+
+function desenhar(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    desenharEixo();
+    desenharLente();
+
+    if(comportamentoAtual){
+        desenharRaios(progresso);
+    }
+}
+
+function iniciarAnimacao(){
+
+    const previsaoSelecionada =
+        document.querySelector(
+            'input[name="previsao"]:checked'
+        );
+
+    comportamentoAtual =
+        calcularComportamento();
+
+    progresso=0;
+    animando=true;
+
+    infoComportamento.textContent="Analisando...";
+    infoFoco.textContent="...";
+
+    resultado.className="resultado";
+
+    resultado.innerHTML=
+        "Observe a propagação dos raios luminosos.";
+
+    animar();
+}
+
+function animar(){
+
+    if(!animando) return;
+
+    progresso += 0.012;
+
+    if(progresso>=1){
+        progresso=1;
+        animando=false;
+        finalizar();
+    }
+
+    desenhar();
+
+    if(animando){
+        requestAnimationFrame(animar);
+    }
+}
+
+function finalizar(){
+
+    const previsaoSelecionada =
+        document.querySelector(
+            'input[name="previsao"]:checked'
+        );
+
+    if(comportamentoAtual==="convergente"){
+
+        infoComportamento.textContent="Convergente";
+        infoFoco.textContent="Real";
+
+    }else if(
+        comportamentoAtual==="divergente"
+    ){
+
+        infoComportamento.textContent="Divergente";
+        infoFoco.textContent="Virtual";
+
+    }else{
+
+        infoComportamento.textContent="Sem desvio";
+        infoFoco.textContent="Não definido";
+    }
+
+    if(!previsaoSelecionada){
+
+        resultado.className="resultado";
+
+        resultado.innerHTML=
+            "<b>Resultado:</b> a lente apresentou comportamento " +
+            "<b>"+comportamentoAtual+"</b>.";
+
+        return;
+    }
+
+    const previsao =
+        previsaoSelecionada.value;
+
+    if(previsao===comportamentoAtual){
+
+        resultado.className=
+            "resultado correto";
+
+        resultado.innerHTML=
+            "✅ <b>Previsão correta!</b><br>" +
+            explicarResultado();
+
+    }else{
+
+        resultado.className=
+            "resultado errado";
+
+        resultado.innerHTML=
+            "❌ <b>Sua previsão não corresponde ao resultado.</b><br>" +
+            explicarResultado();
+    }
+}
+
+function explicarResultado(){
+
+    const nLente =
+        parseFloat(nLenteInput.value);
+
+    const nMeio =
+        parseFloat(nMeioInput.value);
+
+    const bordas =
+        bordasDaLente(tipoLente.value);
+
+    if(
+        Math.abs(nLente-nMeio)<0.0001
+    ){
+        return "Como os índices de refração são iguais, praticamente não ocorre desvio dos raios.";
+    }
+
+    return (
+        "A lente possui <b>bordas " +
+        bordas.toLowerCase() +
+        "</b> e está em um meio com " +
+        "n<sub>lente</sub> = " +
+        nLente.toFixed(2).replace(".",",") +
+        " e n<sub>meio</sub> = " +
+        nMeio.toFixed(2).replace(".",",") +
+        ". Nesse caso, ela se comporta como uma lente <b>" +
+        comportamentoAtual +
+        "</b>."
+    );
+}
+
+function resetar(){
+
+    tipoLente.value="biconvexa";
+
+    r1Input.value=150;
+    r2Input.value=150;
+
+    nLenteInput.value=1.50;
+    nMeioInput.value=1.00;
+
+    mostrarElementos.checked=false;
+
+    document.querySelectorAll(
+        'input[name="previsao"]'
+    ).forEach(r=>r.checked=false);
+
+    comportamentoAtual=null;
+    progresso=0;
+    animando=false;
+
+    infoComportamento.textContent="---";
+    infoFoco.textContent="---";
+
+    resultado.className="resultado";
+
+    resultado.innerHTML=
+        'Escolha os parâmetros, faça sua previsão e clique em <b>Propagar luz</b>.';
+
+    atualizarPainel();
+    desenhar();
+}
+
+[
+    tipoLente,
+    r1Input,
+    r2Input,
+    nLenteInput,
+    nMeioInput,
+    mostrarElementos
+].forEach(elemento=>{
+
+    elemento.addEventListener("input",()=>{
+        atualizarPainel();
+        desenhar();
+    });
+
+    elemento.addEventListener("change",()=>{
+        atualizarPainel();
+        desenhar();
+    });
+
+});
+
+document
+.getElementById("btnPropagar")
+.addEventListener("click",iniciarAnimacao);
+
+document
+.getElementById("btnReset")
+.addEventListener("click",resetar);
+
+atualizarPainel();
+desenhar();
+
+</script>
+
+</body>
+</html>
