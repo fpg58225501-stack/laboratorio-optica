@@ -24,10 +24,6 @@ body{
     color:#172033;
 }
 
-/* =========================================================
-   MENU
-========================================================= */
-
 nav{
     position:sticky;
     top:0;
@@ -60,10 +56,6 @@ nav a:hover{
     background:#eaf2ff;
 }
 
-/* =========================================================
-   CABEÇALHO
-========================================================= */
-
 header{
     text-align:center;
     padding:48px 20px 30px;
@@ -80,10 +72,6 @@ header p{
     color:#64748b;
     font-size:18px;
 }
-
-/* =========================================================
-   SEÇÕES
-========================================================= */
 
 section{
     max-width:1350px;
@@ -134,10 +122,6 @@ h2{
     font-size:22px;
     margin-bottom:22px;
 }
-
-/* =========================================================
-   CONTROLES
-========================================================= */
 
 .area{
     display:grid;
@@ -222,10 +206,6 @@ canvas{
     line-height:1.45;
 }
 
-/* =========================================================
-   PARTE 2
-========================================================= */
-
 .controle-elementos{
     display:flex;
     justify-content:center;
@@ -240,9 +220,7 @@ canvas{
     font-size:14px;
 }
 
-/* =========================================================
-   PARTE 3 - IMAGEM ORIGINAL
-========================================================= */
+/* PARTE 3 */
 
 .quadro-lentes{
     width:100%;
@@ -274,12 +252,10 @@ canvas{
     line-height:1.5;
 }
 
-/* =========================================================
-   PARTE 4
-========================================================= */
+/* PARTE 4 */
 
 .previsao{
-    background:#fff;
+    background:white;
     border:1px solid #dce3ea;
     border-radius:11px;
     padding:12px;
@@ -337,10 +313,6 @@ canvas{
     background:#fffbeb;
 }
 
-/* =========================================================
-   RESPONSIVO
-========================================================= */
-
 @media(max-width:900px){
 
     section{
@@ -360,30 +332,16 @@ canvas{
 </style>
 </head>
 
-
 <body>
-
-<!-- =========================================================
-     MENU
-========================================================= -->
 
 <nav>
 
 <div class="nav-inner">
 
 <a href="#definicao">1. Definição</a>
-
-<a href="#elementos">
-2. Elementos geométricos
-</a>
-
-<a href="#tipos">
-3. Tipos de lentes
-</a>
-
-<a href="#comportamento">
-4. Convergência e divergência
-</a>
+<a href="#elementos">2. Elementos geométricos</a>
+<a href="#tipos">3. Tipos de lentes</a>
+<a href="#comportamento">4. Convergência e divergência</a>
 
 </div>
 
@@ -401,20 +359,16 @@ Elementos geométricos e comportamento das lentes
 </header>
 
 
-<!-- =========================================================
+<!-- =====================================================
      PARTE 1
-========================================================= -->
+===================================================== -->
 
 <section id="definicao">
 
 <div class="titulo-secao">
-
 <div class="numero">1</div>
-
 <h2>O que é uma lente?</h2>
-
 </div>
-
 
 <div class="definicao">
 
@@ -423,7 +377,6 @@ que <strong>muda a trajetória da luz</strong>.
 
 </div>
 
-
 <p class="explicacao">
 
 Observe o que acontece com raios luminosos paralelos
@@ -431,13 +384,11 @@ quando atravessam diferentes tipos de lentes.
 
 </p>
 
-
 <div class="area">
 
 <div class="controles">
 
 <h3>Escolha a lente</h3>
-
 
 <div class="grupo">
 
@@ -445,46 +396,28 @@ quando atravessam diferentes tipos de lentes.
 
 <select id="objetoDef">
 
-<option value="biconvexa">
-Biconvexa
-</option>
-
-<option value="planoConvexa">
-Plano-convexa
-</option>
-
-<option value="biconcava">
-Bicôncava
-</option>
-
-<option value="planoConcava">
-Plano-côncava
-</option>
+<option value="biconvexa">Biconvexa</option>
+<option value="planoConvexa">Plano-convexa</option>
+<option value="biconcava">Bicôncava</option>
+<option value="planoConcava">Plano-côncava</option>
 
 </select>
 
 </div>
 
-
 <button
 class="botao-principal botao-largo"
 id="btnLuzDef">
-
 ▶ INCIDIR LUZ
-
 </button>
-
 
 <button
 class="botao-claro botao-largo"
 id="btnResetDef">
-
 RESETAR
-
 </button>
 
 </div>
-
 
 <div>
 
@@ -494,37 +427,30 @@ width="920"
 height="430">
 </canvas>
 
-
 <div
 class="caixa-info"
 id="textoDef">
 
-Escolha uma lente e clique em
-<b>Incidir luz</b>.
+Escolha uma lente e clique em <b>Incidir luz</b>.
 
 </div>
 
 </div>
-
 </div>
 
 </section>
 
 
-<!-- =========================================================
+<!-- =====================================================
      PARTE 2
-========================================================= -->
+===================================================== -->
 
 <section id="elementos">
 
 <div class="titulo-secao">
-
 <div class="numero">2</div>
-
 <h2>Elementos geométricos da lente</h2>
-
 </div>
-
 
 <p class="explicacao">
 
@@ -533,13 +459,11 @@ de uma lente esférica.
 
 </p>
 
-
 <canvas
 id="canvasElementos"
 width="1100"
 height="500">
 </canvas>
-
 
 <div
 class="caixa-info"
@@ -549,63 +473,47 @@ Clique em <b>Próximo</b> para iniciar.
 
 </div>
 
-
 <div class="controle-elementos">
 
 <button
 class="botao-claro"
 id="btnAnterior">
-
 ← ANTERIOR
-
 </button>
-
 
 <button
 class="botao-principal"
 id="btnProximo">
-
 PRÓXIMO →
-
 </button>
-
 
 <button
 class="botao-claro"
 id="btnResetElementos">
-
 RESETAR
-
 </button>
 
 </div>
 
-
 <div
 class="contador"
 id="contadorElemento">
-
 0 / 9
-
 </div>
 
 </section>
 
 
-<!-- =========================================================
+<!-- =====================================================
      PARTE 3
-========================================================= -->
+===================================================== -->
 
 <section id="tipos">
 
 <div class="titulo-secao">
-
 <div class="numero">3</div>
-
 <h2>Tipos de lentes</h2>
-
 </div>
-
 
 <p class="explicacao">
 
@@ -613,7 +521,6 @@ Observe os seis tipos de lentes esféricas e a relação
 entre suas superfícies, centros de curvatura e raios.
 
 </p>
-
 
 <div class="quadro-lentes">
 
@@ -623,13 +530,12 @@ alt="Tipos de lentes esféricas">
 
 </div>
 
-
 <div class="observacao-imagem">
 
 A nomenclatura da lente depende do formato de suas
 superfícies. Observe também a posição dos centros de
-curvatura <strong>C₁</strong> e <strong>C₂</strong> e
-dos respectivos raios <strong>R₁</strong> e
+curvatura <strong>C₁</strong> e <strong>C₂</strong>
+e dos respectivos raios <strong>R₁</strong> e
 <strong>R₂</strong>.
 
 </div>
@@ -637,36 +543,29 @@ dos respectivos raios <strong>R₁</strong> e
 </section>
 
 
-<!-- =========================================================
+<!-- =====================================================
      PARTE 4
-========================================================= -->
+===================================================== -->
 
 <section id="comportamento">
 
 <div class="titulo-secao">
-
 <div class="numero">4</div>
-
 <h2>Convergência e divergência</h2>
-
 </div>
-
 
 <p class="explicacao">
 
-Escolha as características da lente e do meio e observe
-o comportamento dos raios luminosos.
+Escolha o formato da lente, o tipo de borda e os índices
+de refração. Depois observe o comportamento dos raios luminosos.
 
 </p>
-
 
 <div class="area">
 
 <div class="controles">
 
-
 <h3>Configure a experiência</h3>
-
 
 <div class="grupo">
 
@@ -674,53 +573,29 @@ o comportamento dos raios luminosos.
 
 <select id="tipoFinal">
 
-<option value="biconvexa">
-Biconvexa
-</option>
-
-<option value="planoConvexa">
-Plano-convexa
-</option>
-
-<option value="concavoConvexa">
-Côncavo-convexa
-</option>
-
-<option value="biconcava">
-Bicôncava
-</option>
-
-<option value="planoConcava">
-Plano-côncava
-</option>
-
-<option value="convexoConcava">
-Convexo-côncava
-</option>
+<option value="biconvexa">Biconvexa</option>
+<option value="planoConvexa">Plano-convexa</option>
+<option value="concavoConvexa">Côncavo-convexa</option>
+<option value="biconcava">Bicôncava</option>
+<option value="planoConcava">Plano-côncava</option>
+<option value="convexoConcava">Convexo-côncava</option>
 
 </select>
 
 </div>
-
 
 <div class="grupo">
 
-<label>Espessura das bordas</label>
+<label>Bordas</label>
 
 <select id="bordasFinal">
 
-<option value="finas">
-Bordas finas
-</option>
-
-<option value="espessas">
-Bordas espessas
-</option>
+<option value="finas">Bordas finas</option>
+<option value="espessas">Bordas espessas</option>
 
 </select>
 
 </div>
-
 
 <div class="grupo">
 
@@ -730,11 +605,10 @@ Bordas espessas
 id="nLenteFinal"
 type="number"
 step="0.01"
-min="1"
+min="0.01"
 value="1.50">
 
 </div>
-
 
 <div class="grupo">
 
@@ -744,18 +618,14 @@ value="1.50">
 id="nMeioFinal"
 type="number"
 step="0.01"
-min="1"
+min="0.01"
 value="1.00">
 
 </div>
 
-
 <div class="previsao">
 
-<strong>
-Faça sua previsão:
-</strong>
-
+<strong>Antes de testar, faça sua previsão:</strong>
 
 <div class="opcao">
 
@@ -770,7 +640,6 @@ Convergente
 </label>
 
 </div>
-
 
 <div class="opcao">
 
@@ -788,22 +657,16 @@ Divergente
 
 </div>
 
-
 <button
 class="botao-principal botao-largo"
 id="btnPropagarFinal">
-
 ▶ PROPAGAR LUZ
-
 </button>
-
 
 <button
 class="botao-claro botao-largo"
 id="btnResetFinal">
-
 RESETAR
-
 </button>
 
 </div>
@@ -817,68 +680,39 @@ width="920"
 height="470">
 </canvas>
 
-
 <div class="painel-resultados">
 
-
 <div class="mini-card">
-
 <span>Formato</span>
-
-<strong id="rTipo">
-Biconvexa
-</strong>
-
+<strong id="rTipo">Biconvexa</strong>
 </div>
 
-
 <div class="mini-card">
-
 <span>Bordas</span>
-
-<strong id="rBorda">
-Finas
-</strong>
-
+<strong id="rBorda">Finas</strong>
 </div>
 
-
 <div class="mini-card">
-
 <span>Comportamento</span>
-
-<strong id="rComp">
-—
-</strong>
-
+<strong id="rComp">—</strong>
 </div>
-
 
 <div class="mini-card">
-
 <span>Foco</span>
-
-<strong id="rFoco">
-—
-</strong>
-
+<strong id="rFoco">—</strong>
 </div>
 
-
 </div>
-
 
 <div
 class="caixa-info"
 id="resultadoFinal">
 
-Faça sua previsão e clique em
-<b>Propagar luz</b>.
+Faça sua previsão e clique em <b>Propagar luz</b>.
 
 </div>
 
 </div>
-
 </div>
 
 </section>
@@ -887,9 +721,7 @@ Faça sua previsão e clique em
 <script>
 
 /* ============================================================
-   DESENHO SIMPLIFICADO DAS LENTES
-   Usado apenas nas partes interativas 1 e 4.
-   A PARTE 3 USA A IMAGEM ORIGINAL.
+   FUNÇÃO DE DESENHO DAS LENTES
 ============================================================ */
 
 function desenharLente(ctx,cx,cy,h,tipo){
@@ -899,6 +731,8 @@ function desenharLente(ctx,cx,cy,h,tipo){
 
     ctx.beginPath();
 
+
+    /* BICONVEXA */
 
     if(tipo==="biconvexa"){
 
@@ -918,6 +752,8 @@ function desenharLente(ctx,cx,cy,h,tipo){
     }
 
 
+    /* PLANO-CONVEXA */
+
     else if(tipo==="planoConvexa"){
 
         ctx.moveTo(cx-35,topo);
@@ -925,85 +761,97 @@ function desenharLente(ctx,cx,cy,h,tipo){
         ctx.lineTo(cx-35,baixo);
 
         ctx.bezierCurveTo(
-            cx+75,baixo-35,
-            cx+75,topo+35,
+            cx+80,baixo-35,
+            cx+80,topo+35,
             cx-35,topo
         );
-    }
-
-
-    else if(tipo==="biconcava"){
-
-        ctx.moveTo(cx-65,topo);
-
-        ctx.bezierCurveTo(
-            cx-10,topo+45,
-            cx-10,baixo-45,
-            cx-65,baixo
-        );
-
-        ctx.lineTo(cx+65,baixo);
-
-        ctx.bezierCurveTo(
-            cx+10,baixo-45,
-            cx+10,topo+45,
-            cx+65,topo
-        );
 
         ctx.closePath();
     }
 
 
-    else if(tipo==="planoConcava"){
-
-        ctx.moveTo(cx-65,topo);
-
-        ctx.lineTo(cx-65,baixo);
-
-        ctx.lineTo(cx+60,baixo);
-
-        ctx.bezierCurveTo(
-            cx+5,baixo-45,
-            cx+5,topo+45,
-            cx+60,topo
-        );
-
-        ctx.closePath();
-    }
-
+    /* CÔNCAVO-CONVEXA */
 
     else if(tipo==="concavoConvexa"){
 
-        ctx.moveTo(cx-20,topo);
+        ctx.moveTo(cx-25,topo);
 
         ctx.bezierCurveTo(
-            cx+10,topo+45,
-            cx+10,baixo-45,
-            cx-20,baixo
+            cx+12,topo+45,
+            cx+12,baixo-45,
+            cx-25,baixo
         );
 
         ctx.bezierCurveTo(
-            cx+75,baixo-35,
-            cx+75,topo+35,
-            cx-20,topo
+            cx+82,baixo-35,
+            cx+82,topo+35,
+            cx-25,topo
         );
+
+        ctx.closePath();
     }
 
 
-    else if(tipo==="convexoConcava"){
+    /* BICÔNCAVA */
 
-        ctx.moveTo(cx-65,topo);
+    else if(tipo==="biconcava"){
+
+        ctx.moveTo(cx-68,topo);
 
         ctx.bezierCurveTo(
-            cx+35,topo+35,
-            cx+35,baixo-35,
-            cx-65,baixo
+            cx-10,topo+48,
+            cx-10,baixo-48,
+            cx-68,baixo
+        );
+
+        ctx.lineTo(cx+68,baixo);
+
+        ctx.bezierCurveTo(
+            cx+10,baixo-48,
+            cx+10,topo+48,
+            cx+68,topo
+        );
+
+        ctx.closePath();
+    }
+
+
+    /* PLANO-CÔNCAVA */
+
+    else if(tipo==="planoConcava"){
+
+        ctx.moveTo(cx-68,topo);
+
+        ctx.lineTo(cx-68,baixo);
+
+        ctx.lineTo(cx+62,baixo);
+
+        ctx.bezierCurveTo(
+            cx+5,baixo-48,
+            cx+5,topo+48,
+            cx+62,topo
+        );
+
+        ctx.closePath();
+    }
+
+
+    /* CONVEXO-CÔNCAVA */
+
+    else if(tipo==="convexoConcava"){
+
+        ctx.moveTo(cx-68,topo);
+
+        ctx.bezierCurveTo(
+            cx+32,topo+35,
+            cx+32,baixo-35,
+            cx-68,baixo
         );
 
         ctx.bezierCurveTo(
-            cx-5,baixo-45,
-            cx-5,topo+45,
-            cx-65,topo
+            cx-5,baixo-48,
+            cx-5,topo+48,
+            cx-68,topo
         );
 
         ctx.closePath();
@@ -1043,7 +891,7 @@ let progressoDef=0;
 let rodandoDef=false;
 
 
-function tipoBasico(tipo){
+function comportamentoBasico(tipo){
 
     if(
         tipo==="biconvexa" ||
@@ -1065,25 +913,22 @@ function desenharDef(){
         canvasDef.height
     );
 
-
     const cx=460;
     const cy=215;
 
+
+    /* EIXO */
 
     ctxDef.strokeStyle="#94a3b8";
     ctxDef.lineWidth=1.5;
 
     ctxDef.beginPath();
-
     ctxDef.moveTo(35,cy);
-
-    ctxDef.lineTo(
-        canvasDef.width-35,
-        cy
-    );
-
+    ctxDef.lineTo(canvasDef.width-35,cy);
     ctxDef.stroke();
 
+
+    /* LENTE */
 
     desenharLente(
         ctxDef,
@@ -1099,7 +944,9 @@ function desenharDef(){
 
 
     const comportamento=
-    tipoBasico(objetoDef.value);
+    comportamentoBasico(
+        objetoDef.value
+    );
 
 
     const ys=[
@@ -1119,12 +966,13 @@ function desenharDef(){
 
     ys.forEach(y=>{
 
+        /* ENTRADA */
+
         const entrada=
         Math.min(
             progressoDef*2,
             1
         );
-
 
         const inicioX=55;
 
@@ -1155,16 +1003,16 @@ function desenharDef(){
             return;
 
 
+        /* SAÍDA */
+
         const saida=
         Math.min(
             (progressoDef-.5)*2,
             1
         );
 
-
         const finalX=
         canvasDef.width-55;
-
 
         let finalY;
 
@@ -1195,7 +1043,6 @@ function desenharDef(){
         cx+
         (finalX-cx)*saida;
 
-
         const ya=
         y+
         (finalY-y)*saida;
@@ -1213,6 +1060,8 @@ function desenharDef(){
 
     });
 
+
+    /* PROLONGAMENTOS */
 
     if(
         progressoDef>=1 &&
@@ -1243,6 +1092,8 @@ function desenharDef(){
         });
     }
 
+
+    /* FOCO */
 
     if(progressoDef>=1){
 
@@ -1277,13 +1128,13 @@ function animarDef(){
     if(!rodandoDef)
         return;
 
-
     progressoDef+=.013;
 
 
     if(progressoDef>=1){
 
         progressoDef=1;
+
         rodandoDef=false;
     }
 
@@ -1300,8 +1151,8 @@ function animarDef(){
     }else{
 
         textoDef.innerHTML=
-        "A luz atravessou a lente, sofreu <b>refração</b> "+
-        "e teve sua trajetória modificada.";
+        "Ao atravessar a lente, a luz sofre <b>refração</b> "+
+        "e sua trajetória é modificada.";
     }
 }
 
@@ -1315,7 +1166,7 @@ document
     rodandoDef=true;
 
     textoDef.innerHTML=
-    "Observe os raios atravessando a lente.";
+    "Observe a propagação da luz.";
 
     animarDef();
 };
@@ -1336,18 +1187,20 @@ document
 };
 
 
-objetoDef.onchange=()=>{
+objetoDef.addEventListener(
+"change",
+()=>{
 
     rodandoDef=false;
 
     progressoDef=0;
 
     desenharDef();
-};
+});
 
 
 /* ============================================================
-   PARTE 2 — ELEMENTOS GEOMÉTRICOS
+   PARTE 2
 ============================================================ */
 
 const canvasEl=
@@ -1421,7 +1274,7 @@ const textosElementos=[
 
     "<b>R₂:</b> raio de curvatura da segunda superfície.",
 
-    "<b>Esferas geradoras:</b> as superfícies curvas da lente fazem parte dessas superfícies esféricas."
+    "<b>Esferas geradoras:</b> as faces curvas da lente pertencem às superfícies esféricas indicadas."
 
 ];
 
@@ -1481,7 +1334,6 @@ function pontoElemento(
     ctxEl.font=
     "bold 16px Arial";
 
-
     ctxEl.fillText(
         nome,
         x-8,
@@ -1501,6 +1353,8 @@ function desenharElementos(){
         canvasEl.height
     );
 
+
+    /* ESFERAS GERADORAS */
 
     if(etapaElemento>=9){
 
@@ -1543,6 +1397,8 @@ function desenharElementos(){
     }
 
 
+    /* LENTE */
+
     const topo=
     eixoY-145;
 
@@ -1561,7 +1417,6 @@ function desenharElementos(){
 
         const x=
         superficieEsquerda(y);
-
 
         if(y===topo){
 
@@ -1598,8 +1453,11 @@ function desenharElementos(){
     ctxEl.lineWidth=3;
 
     ctxEl.fill();
+
     ctxEl.stroke();
 
+
+    /* EIXO */
 
     if(etapaElemento>=1){
 
@@ -1620,7 +1478,6 @@ function desenharElementos(){
         );
 
         ctxEl.stroke();
-
 
         ctxEl.fillStyle="#64748b";
 
@@ -1689,6 +1546,7 @@ function desenharElementos(){
     if(etapaElemento>=7){
 
         ctxEl.strokeStyle="#475569";
+
         ctxEl.lineWidth=2;
 
         ctxEl.beginPath();
@@ -1704,7 +1562,6 @@ function desenharElementos(){
         );
 
         ctxEl.stroke();
-
 
         ctxEl.fillStyle="#334155";
 
@@ -1736,7 +1593,6 @@ function desenharElementos(){
         );
 
         ctxEl.stroke();
-
 
         ctxEl.fillStyle="#334155";
 
@@ -1806,7 +1662,7 @@ document
 
 
 /* ============================================================
-   PARTE 4 — CONVERGÊNCIA E DIVERGÊNCIA
+   PARTE 4
 ============================================================ */
 
 const canvasFinal=
@@ -1863,14 +1719,7 @@ let comportamentoFinal=null;
 
 
 /* ============================================================
-   REGRA DIDÁTICA DA PARTE 4
-
-   n_lente > n_meio:
-   bordas finas     -> convergente
-   bordas espessas  -> divergente
-
-   n_lente < n_meio:
-   comportamento invertido
+   COMPORTAMENTO ÓPTICO
 ============================================================ */
 
 function calcularComportamento(){
@@ -1893,6 +1742,8 @@ function calcularComportamento(){
     }
 
 
+    /* MESMO ÍNDICE */
+
     if(
         Math.abs(nl-nm)<0.000001
     ){
@@ -1901,19 +1752,44 @@ function calcularComportamento(){
     }
 
 
+    /* LENTE MAIS REFRINGENTE */
+
     if(nl>nm){
 
-        return bordasFinal.value==="finas"
-        ?"convergente"
-        :"divergente";
+        if(
+            bordasFinal.value==="finas"
+        ){
+
+            return "convergente";
+
+        }else{
+
+            return "divergente";
+        }
     }
 
 
-    return bordasFinal.value==="finas"
-    ?"divergente"
-    :"convergente";
+    /* MEIO MAIS REFRINGENTE */
+
+    if(
+        bordasFinal.value==="finas"
+    ){
+
+        return "divergente";
+
+    }else{
+
+        return "convergente";
+    }
 }
 
+
+/* ============================================================
+   DESENHO DA PARTE 4
+
+   CORREÇÃO:
+   O FORMATO VISUAL AGORA É SEMPRE tipoFinal.value
+============================================================ */
 
 function desenharExperiencia(){
 
@@ -1928,6 +1804,8 @@ function desenharExperiencia(){
     const cx=455;
     const cy=235;
 
+
+    /* EIXO ÓPTICO */
 
     ctxFinal.strokeStyle="#94a3b8";
 
@@ -1959,23 +1837,19 @@ function desenharExperiencia(){
     );
 
 
-    /*
-       Para a experiência, o desenho visual
-       acompanha a escolha das bordas.
-    */
+    /* =========================================
+       AQUI ESTÁ A CORREÇÃO PRINCIPAL
 
-    const tipoVisual=
-    bordasFinal.value==="finas"
-    ?"biconvexa"
-    :"biconcava";
-
+       O desenho usa diretamente o formato
+       selecionado pelo professor.
+    ========================================= */
 
     desenharLente(
         ctxFinal,
         cx,
         cy,
         260,
-        tipoVisual
+        tipoFinal.value
     );
 
 
@@ -2006,6 +1880,8 @@ function desenharExperiencia(){
 
 
     ys.forEach(y=>{
+
+        /* RAIOS INCIDENTES */
 
         const entrada=
         Math.min(
@@ -2042,12 +1918,16 @@ function desenharExperiencia(){
             return;
 
 
+        /* RAIOS REFRATADOS */
+
         const saida=
         Math.min(
             (progressoFinal-.5)*2,
             1
         );
 
+
+        /* SEM DESVIO */
 
         if(
             comportamentoFinal==="neutro"
@@ -2075,6 +1955,8 @@ function desenharExperiencia(){
         let destinoY;
 
 
+        /* CONVERGENTE */
+
         if(
             comportamentoFinal==="convergente"
         ){
@@ -2083,27 +1965,34 @@ function desenharExperiencia(){
             cx+distanciaFoco;
 
 
-            const m=
+            const inclinacao=
             (cy-y)/(focoX-cx);
 
 
             destinoY=
             y+
-            m*(finalX-cx);
+            inclinacao*
+            (finalX-cx);
+        }
 
-        }else{
+
+        /* DIVERGENTE */
+
+        else{
 
             const focoVirtual=
             cx-distanciaFoco;
 
 
-            const m=
-            (y-cy)/(cx-focoVirtual);
+            const inclinacao=
+            (y-cy)/
+            (cx-focoVirtual);
 
 
             destinoY=
             y+
-            m*(finalX-cx);
+            inclinacao*
+            (finalX-cx);
         }
 
 
@@ -2127,6 +2016,8 @@ function desenharExperiencia(){
 
         ctxFinal.stroke();
 
+
+        /* PROLONGAMENTO VIRTUAL */
 
         if(
             progressoFinal>=1 &&
@@ -2155,14 +2046,19 @@ function desenharExperiencia(){
     });
 
 
+    /* FOCO */
+
     if(
         progressoFinal>=1 &&
         comportamentoFinal!=="neutro"
     ){
 
         const focoX=
+
         comportamentoFinal==="convergente"
+
         ?cx+distanciaFoco
+
         :cx-distanciaFoco;
 
 
@@ -2192,6 +2088,10 @@ function desenharExperiencia(){
     }
 }
 
+
+/* ============================================================
+   INICIAR EXPERIÊNCIA
+============================================================ */
 
 function iniciarExperiencia(){
 
@@ -2233,12 +2133,14 @@ function iniciarExperiencia(){
     rComp.textContent=
     "Analisando...";
 
+
     rFoco.textContent=
     "...";
 
 
     resultadoFinal.className=
     "caixa-info";
+
 
     resultadoFinal.innerHTML=
     "Observe a trajetória dos raios luminosos.";
@@ -2247,6 +2149,10 @@ function iniciarExperiencia(){
     animarExperiencia();
 }
 
+
+/* ============================================================
+   ANIMAÇÃO
+============================================================ */
 
 function animarExperiencia(){
 
@@ -2280,6 +2186,10 @@ function animarExperiencia(){
     }
 }
 
+
+/* ============================================================
+   RESULTADO
+============================================================ */
 
 function finalizarExperiencia(){
 
@@ -2345,27 +2255,33 @@ function finalizarExperiencia(){
         resultadoFinal.innerHTML=
 
         "Como <b>n<sub>lente</sub> = n<sub>meio</sub></b>, "+
-        "não há desvio provocado por diferença de índice de refração.";
+        "não ocorre desvio devido à diferença de índices de refração.";
 
         return;
     }
 
 
     const bordaTexto=
+
     bordasFinal.value==="finas"
+
     ?"bordas finas"
+
     :"bordas espessas";
 
 
     const relacao=
+
     nl>nm
+
     ?"maior"
+
     :"menor";
 
 
     const explicacao=
 
-    "A lente foi configurada com <b>"+
+    "A lente apresenta <b>"+
     bordaTexto+
     "</b>. O índice da lente ("+
     nl.toFixed(2).replace(".",",")+
@@ -2373,7 +2289,7 @@ function finalizarExperiencia(){
     relacao+
     "</b> que o índice do meio ("+
     nm.toFixed(2).replace(".",",")+
-    "). Nessas condições, a lente apresenta comportamento <b>"+
+    "). Nessas condições, seu comportamento é <b>"+
     comportamentoFinal+
     "</b>.";
 
@@ -2398,6 +2314,7 @@ function finalizarExperiencia(){
         resultadoFinal.className=
         "caixa-info correto";
 
+
         resultadoFinal.innerHTML=
 
         "✅ <b>Previsão correta!</b><br>"+
@@ -2408,6 +2325,7 @@ function finalizarExperiencia(){
         resultadoFinal.className=
         "caixa-info errado";
 
+
         resultadoFinal.innerHTML=
 
         "❌ <b>Previsão incorreta.</b><br>"+
@@ -2415,6 +2333,10 @@ function finalizarExperiencia(){
     }
 }
 
+
+/* ============================================================
+   BOTÕES
+============================================================ */
 
 document
 .getElementById("btnPropagarFinal")
@@ -2470,6 +2392,7 @@ document
     resultadoFinal.className=
     "caixa-info";
 
+
     resultadoFinal.innerHTML=
     "Faça sua previsão e clique em <b>Propagar luz</b>.";
 
@@ -2478,41 +2401,114 @@ document
 };
 
 
-[
-    tipoFinal,
-    bordasFinal,
-    nLenteFinal,
-    nMeioFinal
-]
-.forEach(elemento=>{
+/* ============================================================
+   ALTERAÇÃO DOS CONTROLES DA PARTE 4
 
-    elemento.addEventListener(
-        "change",
-        ()=>{
+   IMPORTANTE:
+   MUDAR O FORMATO REDESENHA A LENTE IMEDIATAMENTE.
+============================================================ */
 
-            rodandoFinal=false;
+tipoFinal.addEventListener(
+"change",
+()=>{
 
-            progressoFinal=0;
+    rodandoFinal=false;
 
-            comportamentoFinal=null;
+    progressoFinal=0;
 
-            rTipo.textContent=
-            tipoFinal.options[
-                tipoFinal.selectedIndex
-            ].text;
+    comportamentoFinal=null;
 
-            rBorda.textContent=
-            bordasFinal.value==="finas"
-            ?"Finas"
-            :"Espessas";
 
-            rComp.textContent="—";
+    rTipo.textContent=
+    tipoFinal.options[
+        tipoFinal.selectedIndex
+    ].text;
 
-            rFoco.textContent="—";
 
-            desenharExperiencia();
-        }
-    );
+    rComp.textContent="—";
+
+    rFoco.textContent="—";
+
+
+    resultadoFinal.className=
+    "caixa-info";
+
+
+    resultadoFinal.innerHTML=
+    "Formato alterado. Faça sua previsão e clique em <b>Propagar luz</b>.";
+
+
+    desenharExperiencia();
+});
+
+
+bordasFinal.addEventListener(
+"change",
+()=>{
+
+    rodandoFinal=false;
+
+    progressoFinal=0;
+
+    comportamentoFinal=null;
+
+
+    rBorda.textContent=
+    bordasFinal.value==="finas"
+    ?"Finas"
+    :"Espessas";
+
+
+    rComp.textContent="—";
+
+    rFoco.textContent="—";
+
+
+    resultadoFinal.className=
+    "caixa-info";
+
+
+    resultadoFinal.innerHTML=
+    "Bordas alteradas. Faça sua previsão e clique em <b>Propagar luz</b>.";
+
+
+    desenharExperiencia();
+});
+
+
+nLenteFinal.addEventListener(
+"input",
+()=>{
+
+    rodandoFinal=false;
+
+    progressoFinal=0;
+
+    comportamentoFinal=null;
+
+    rComp.textContent="—";
+
+    rFoco.textContent="—";
+
+    desenharExperiencia();
+});
+
+
+nMeioFinal.addEventListener(
+"input",
+()=>{
+
+    rodandoFinal=false;
+
+    progressoFinal=0;
+
+    comportamentoFinal=null;
+
+    rComp.textContent="—";
+
+    rFoco.textContent="—";
+
+    desenharExperiencia();
 });
 
 
